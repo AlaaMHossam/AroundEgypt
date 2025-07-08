@@ -1,6 +1,7 @@
 package com.alaa.hossam.aroundegypt.ui.components.place
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,19 +24,22 @@ import com.alaa.hossam.aroundegypt.ui.R
 
 @Composable
 fun PlaceListItemComponent(modifier: Modifier = Modifier) {
-    Column {
+    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
         Surface(
             shape = MaterialTheme.shapes.small,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(154.dp)
         ) {
+            // Background
             Image(
                 modifier = Modifier.fillMaxWidth(),
                 painter = painterResource(R.drawable.img_place_list_item_cover_dummy),
                 contentDescription = null,
                 contentScale = ContentScale.Crop
             )
+
+            // Main content
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -64,7 +69,15 @@ fun PlaceListItemComponent(modifier: Modifier = Modifier) {
             }
         }
 
-        Row {}
+        // Title & Likes
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 3.dp)
+        ) {
+            Text(text = "Nubian House")
+            PlaceLikesComponent()
+        }
     }
 }
 
