@@ -1,4 +1,4 @@
-package com.alaa.hossam.aroundegypt.ui.components.place_details
+package com.alaa.hossam.aroundegypt.ui.components.experience_details
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -23,11 +23,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.alaa.hossam.aroundegypt.ui.R
-import com.alaa.hossam.aroundegypt.ui.components.place_list_item.PlaceViewsComponent
+import com.alaa.hossam.aroundegypt.ui.components.experience_list_item.ExperienceViewsComponent
 import com.alaa.hossam.aroundegypt.ui.detailsTintColor
 
 @Composable
-fun PlaceDetailsTopComponent(modifier: Modifier = Modifier) {
+fun ExperienceDetailsTopComponent(modifier: Modifier = Modifier) {
     Box(modifier = Modifier.height(285.dp)) {
         Image(
             modifier = Modifier.fillMaxSize(),
@@ -55,7 +55,7 @@ fun PlaceDetailsTopComponent(modifier: Modifier = Modifier) {
                     )
                 )
         )
-        PlaceViewsComponent(
+        ExperienceViewsComponent(
             modifier = Modifier
                 .align(alignment = Alignment.BottomStart)
                 .padding(8.dp)
@@ -71,6 +71,6 @@ fun PlaceDetailsTopComponent(modifier: Modifier = Modifier) {
 
 @Preview
 @Composable
-private fun PlaceDetailsTopComponentPreview() {
-    PlaceDetailsTopComponent()
+private fun ExperienceDetailsTopComponentPreview() {
+    ExperienceDetailsTopComponent()
 }

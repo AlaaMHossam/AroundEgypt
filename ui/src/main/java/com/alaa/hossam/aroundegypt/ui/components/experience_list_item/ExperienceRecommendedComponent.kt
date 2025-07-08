@@ -1,4 +1,4 @@
-package com.alaa.hossam.aroundegypt.ui.components.place_list_item
+package com.alaa.hossam.aroundegypt.ui.components.experience_list_item
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.sp
 import com.alaa.hossam.aroundegypt.ui.R
 
 @Composable
-fun PlaceRecommendedComponent(modifier: Modifier = Modifier) {
+fun ExperienceRecommendedComponent(modifier: Modifier = Modifier) {
     Surface(shape = CircleShape, color = Color.Black.copy(alpha = 0.5f)) {
         Row(verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -31,6 +31,6 @@ fun PlaceRecommendedComponent(modifier: Modifier = Modifier) {
 
 @Preview
 @Composable
-private fun PlaceRecommendedComponentPreview() {
-    PlaceRecommendedComponent()
+private fun ExperienceRecommendedComponentPreview() {
+    ExperienceRecommendedComponent()
 }

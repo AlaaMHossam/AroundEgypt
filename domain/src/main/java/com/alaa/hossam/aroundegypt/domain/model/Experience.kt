@@ -1,6 +1,6 @@
 package com.alaa.hossam.aroundegypt.domain.model
 
-data class Place(
+data class Experience(
     val id: Int = 0,
     val isRecommended: Boolean = false,
     val coverPhoto: String = "",

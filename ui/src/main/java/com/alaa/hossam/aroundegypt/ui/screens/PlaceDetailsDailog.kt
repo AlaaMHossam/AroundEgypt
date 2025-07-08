@@ -6,20 +6,20 @@ import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.alaa.hossam.aroundegypt.ui.content.DetailsContent
+import com.alaa.hossam.aroundegypt.ui.content.ExperienceContent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PlaceDetailsDialog(modifier: Modifier = Modifier) {
+fun ExperienceDialog(modifier: Modifier = Modifier) {
     ModalBottomSheet(
         onDismissRequest = {},
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
         dragHandle = null,
-        content = { DetailsContent() })
+        content = { ExperienceContent() })
 }
 
 @Preview
 @Composable
-private fun PlaceDetailsDialogPreview() {
-    PlaceDetailsDialog()
+private fun ExperienceDialogPreview() {
+    ExperienceDialog()
 }

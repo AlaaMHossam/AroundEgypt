@@ -1,4 +1,4 @@
-package com.alaa.hossam.aroundegypt.ui.components.place_list_item
+package com.alaa.hossam.aroundegypt.ui.components.experience_list_item
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.alaa.hossam.aroundegypt.ui.R
 
 @Composable
-fun PlaceLikesComponent(modifier: Modifier = Modifier) {
+fun ExperienceLikesComponent(modifier: Modifier = Modifier) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -28,7 +28,7 @@ fun PlaceLikesComponent(modifier: Modifier = Modifier) {
 
 @Preview
 @Composable
-private fun PlaceLikesComponentPreview() {
-    PlaceLikesComponent()
+private fun ExperienceLikesComponentPreview() {
+    ExperienceLikesComponent()
 
 }

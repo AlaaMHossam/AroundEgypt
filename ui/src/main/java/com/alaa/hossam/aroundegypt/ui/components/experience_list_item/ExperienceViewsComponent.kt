@@ -1,4 +1,4 @@
-package com.alaa.hossam.aroundegypt.ui.components.place_list_item
+package com.alaa.hossam.aroundegypt.ui.components.experience_list_item
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.alaa.hossam.aroundegypt.ui.R
 
 @Composable
-fun PlaceViewsComponent(modifier: Modifier = Modifier) {
+fun ExperienceViewsComponent(modifier: Modifier = Modifier) {
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
@@ -34,6 +34,6 @@ fun PlaceViewsComponent(modifier: Modifier = Modifier) {
 
 @Preview
 @Composable
-private fun PlaceViewsComponentPreview() {
-    PlaceViewsComponent()
+private fun ExperienceViewsComponentPreview() {
+    ExperienceViewsComponent()
 }

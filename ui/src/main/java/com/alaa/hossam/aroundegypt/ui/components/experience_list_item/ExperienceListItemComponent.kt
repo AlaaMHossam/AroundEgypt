@@ -1,4 +1,4 @@
-package com.alaa.hossam.aroundegypt.ui.components.place_list_item
+package com.alaa.hossam.aroundegypt.ui.components.experience_list_item
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import com.alaa.hossam.aroundegypt.ui.R
 
 @Composable
-fun PlaceListItemComponent(modifier: Modifier = Modifier) {
+fun ExperienceListItemComponent(modifier: Modifier = Modifier) {
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = modifier
@@ -50,7 +50,7 @@ fun PlaceListItemComponent(modifier: Modifier = Modifier) {
                     .fillMaxSize()
                     .padding(8.dp)
             ) {
-                PlaceRecommendedComponent(modifier = Modifier.align(Alignment.TopStart))
+                ExperienceRecommendedComponent(modifier = Modifier.align(Alignment.TopStart))
                 Icon(
                     modifier = Modifier.align(Alignment.TopEnd),
                     painter = painterResource(R.drawable.icn_information),
@@ -63,7 +63,7 @@ fun PlaceListItemComponent(modifier: Modifier = Modifier) {
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.surface
                 )
-                PlaceViewsComponent(modifier = Modifier.align(Alignment.BottomStart))
+                ExperienceViewsComponent(modifier = Modifier.align(Alignment.BottomStart))
                 Icon(
                     modifier = Modifier.align(Alignment.BottomEnd),
                     painter = painterResource(R.drawable.icn_images),
@@ -82,13 +82,13 @@ fun PlaceListItemComponent(modifier: Modifier = Modifier) {
                 .padding(horizontal = 3.dp)
         ) {
             Text(text = "Nubian House")
-            PlaceLikesComponent()
+            ExperienceLikesComponent()
         }
     }
 }
 
 @Preview
 @Composable
-private fun PlaceListItemComponentPreview() {
-    PlaceListItemComponent()
+private fun ExperienceListItemComponentPreview() {
+    ExperienceListItemComponent()
 }

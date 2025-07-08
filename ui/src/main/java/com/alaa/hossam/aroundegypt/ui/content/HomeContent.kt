@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.alaa.hossam.aroundegypt.ui.components.place_list_item.PlaceListItemComponent
+import com.alaa.hossam.aroundegypt.ui.components.experience_list_item.ExperienceListItemComponent
 
 @Composable
 fun HomeContent(modifier: Modifier = Modifier) {
@@ -28,7 +28,7 @@ fun HomeContent(modifier: Modifier = Modifier) {
         item {
             LazyRow {
                 items(10) {
-                    PlaceListItemComponent()
+                    ExperienceListItemComponent()
                 }
             }
         }
@@ -40,7 +40,7 @@ fun HomeContent(modifier: Modifier = Modifier) {
         }
 
         items(10) {
-            PlaceListItemComponent()
+            ExperienceListItemComponent()
         }
     }
 }

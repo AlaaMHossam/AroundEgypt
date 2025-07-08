@@ -16,12 +16,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.alaa.hossam.aroundegypt.ui.R
-import com.alaa.hossam.aroundegypt.ui.components.place_details.PlaceDetailsTopComponent
+import com.alaa.hossam.aroundegypt.ui.components.experience_details.ExperienceDetailsTopComponent
 
 @Composable
-fun DetailsContent(modifier: Modifier = Modifier) {
+fun ExperienceContent(modifier: Modifier = Modifier) {
     Column {
-        PlaceDetailsTopComponent()
+        ExperienceDetailsTopComponent()
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxWidth().padding(14.dp)
@@ -63,6 +63,6 @@ fun DetailsContent(modifier: Modifier = Modifier) {
 
 @Preview
 @Composable
-private fun DetailsContentPreview() {
-    DetailsContent()
+private fun ExperienceContentPreview() {
+    ExperienceContent()
 }
