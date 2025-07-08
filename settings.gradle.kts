@@ -23,3 +23,4 @@ rootProject.name = "Around Egypt"
 include(":app")
 include(":domain")
 include(":ui")
+include(":common_utils")
