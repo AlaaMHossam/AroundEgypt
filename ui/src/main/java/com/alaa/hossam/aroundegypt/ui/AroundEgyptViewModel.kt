@@ -1,5 +1,7 @@
 package com.alaa.hossam.aroundegypt.ui
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.alaa.hossam.aroundegypt.common_utils.DataState
 import com.alaa.hossam.aroundegypt.common_utils.UiState
 import com.alaa.hossam.aroundegypt.domain.model.Experience
@@ -7,8 +9,10 @@ import com.alaa.hossam.aroundegypt.domain.usecase.GetRecommendedExperiencesUseCa
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
-class AroundEgyptViewModel(private val getRecommendedExperiencesUseCase: GetRecommendedExperiencesUseCase) {
+class AroundEgyptViewModel(private val getRecommendedExperiencesUseCase: GetRecommendedExperiencesUseCase) :
+    ViewModel() {
 
     private val recommendedExperienceMutableUiState =
         MutableStateFlow<UiState<List<Experience>>>(UiState.Initial)
@@ -19,10 +23,16 @@ class AroundEgyptViewModel(private val getRecommendedExperiencesUseCase: GetReco
     }
 
     private fun updateRecommendedExperiences() {
-        recommendedExperienceMutableUiState.update { UiState.Loading }
-        val result = getRecommendedExperiencesUseCase.invoke()
-        if (result is DataState.Success) {
-            recommendedExperienceMutableUiState.update { UiState.Success(result.data) }
+        viewModelScope.launch {
+            recommendedExperienceMutableUiState.update { UiState.Loading }
+            val result = getRecommendedExperiencesUseCase.invoke()
+            when (result) {
+                is DataState.Success ->
+                    recommendedExperienceMutableUiState.update { UiState.Success(result.data) }
+
+                is DataState.Error ->
+                    recommendedExperienceMutableUiState.update { UiState.Error(result.message) }
+            }
         }
     }
 }
