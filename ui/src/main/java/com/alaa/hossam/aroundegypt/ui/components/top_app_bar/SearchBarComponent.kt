@@ -21,9 +21,11 @@ fun SearchBarComponent(modifier: Modifier = Modifier) {
         shape = MaterialTheme.shapes.large,
         colors = TextFieldDefaults.colors(
             focusedContainerColor = searchBgColor,
-            unfocusedContainerColor = searchBgColor
+            unfocusedContainerColor = searchBgColor,
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent
         ),
-        placeholder = { Text(text = "Try Luxor") },
+        placeholder = { Text(text = "\"Try Luxor\"") },
         leadingIcon = {
             Icon(
                 painter = painterResource(R.drawable.icn_search),
