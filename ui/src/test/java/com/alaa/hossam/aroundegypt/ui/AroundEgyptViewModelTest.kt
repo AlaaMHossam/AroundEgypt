@@ -1,7 +1,9 @@
 package com.alaa.hossam.aroundegypt.ui
 
+import com.alaa.hossam.aroundegypt.common_utils.DataState
 import com.alaa.hossam.aroundegypt.common_utils.UiState
 import com.alaa.hossam.aroundegypt.domain.usecase.GetRecommendedExperiencesUseCase
+import io.mockk.coEvery
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.Test
@@ -32,5 +34,18 @@ class AroundEgyptViewModelTest {
 
         // Then
         assert(recommendedExperienceUiState is UiState.Loading)
+    }
+
+    @Test
+    fun when_get_recommended_experiences_use_case_is_success_then_recommended_experience_state_is_success() {
+        // Given
+        coEvery { mockGetRecommendedExperiencesUseCase.invoke() } returns DataState.Success(emptyList())
+        val aroundEgyptViewModel = AroundEgyptViewModel(mockGetRecommendedExperiencesUseCase)
+
+        // When
+        val recommendedExperienceUiState = aroundEgyptViewModel.recommendedExperienceUiState.value
+
+        // Then
+        assert(recommendedExperienceUiState is UiState.Success)
     }
 }

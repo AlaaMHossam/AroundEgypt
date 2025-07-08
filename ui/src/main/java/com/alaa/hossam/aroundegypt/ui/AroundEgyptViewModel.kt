@@ -1,5 +1,6 @@
 package com.alaa.hossam.aroundegypt.ui
 
+import com.alaa.hossam.aroundegypt.common_utils.DataState
 import com.alaa.hossam.aroundegypt.common_utils.UiState
 import com.alaa.hossam.aroundegypt.domain.model.Experience
 import com.alaa.hossam.aroundegypt.domain.usecase.GetRecommendedExperiencesUseCase
@@ -19,6 +20,9 @@ class AroundEgyptViewModel(private val getRecommendedExperiencesUseCase: GetReco
 
     private fun updateRecommendedExperiences() {
         recommendedExperienceMutableUiState.update { UiState.Loading }
-        getRecommendedExperiencesUseCase.invoke()
+        val result = getRecommendedExperiencesUseCase.invoke()
+        if (result is DataState.Success) {
+            recommendedExperienceMutableUiState.update { UiState.Success(result.data) }
+        }
     }
 }

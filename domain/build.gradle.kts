@@ -12,5 +12,6 @@ kotlin {
     }
 }
 dependencies {
+    implementation(project(":common_utils"))
     testImplementation(libs.junit)
 }
