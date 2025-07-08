@@ -1,0 +1,22 @@
+package com.alaa.hossam.aroundegypt.ui.content
+
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import com.alaa.hossam.aroundegypt.ui.components.place.PlaceListItemComponent
+
+@Composable
+fun SearchContent(modifier: Modifier = Modifier) {
+    LazyColumn(content = {
+        items(10) {
+            PlaceListItemComponent()
+        }
+    })
+}
+
+@Preview
+@Composable
+private fun SearchContentPreview() {
+    SearchContent()
+}

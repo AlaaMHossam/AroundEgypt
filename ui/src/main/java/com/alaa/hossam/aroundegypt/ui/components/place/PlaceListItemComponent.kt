@@ -24,7 +24,9 @@ import com.alaa.hossam.aroundegypt.ui.R
 
 @Composable
 fun PlaceListItemComponent(modifier: Modifier = Modifier) {
-    Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+    Column(verticalArrangement = Arrangement.spacedBy(16.dp),
+
+        modifier = Modifier.padding(horizontal = 8.dp)) {
         Surface(
             shape = MaterialTheme.shapes.small,
             modifier = Modifier
