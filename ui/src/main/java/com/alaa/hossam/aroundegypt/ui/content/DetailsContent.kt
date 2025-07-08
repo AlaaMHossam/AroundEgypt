@@ -20,7 +20,6 @@ import com.alaa.hossam.aroundegypt.ui.components.place_details.PlaceDetailsTopCo
 
 @Composable
 fun DetailsContent(modifier: Modifier = Modifier) {
-
     Column {
         PlaceDetailsTopComponent()
         Row(
