@@ -20,11 +20,12 @@ fun HomeContent(modifier: Modifier = Modifier) {
             Text(text = "Welcome!")
             Text(text = "Now you can explore any experience in 360 degrees and get all the details about it all in one place.")
         }
-
         item {
             Spacer(Modifier.height(32.dp))
             Text(text = "Recommended Experiences")
             Spacer(Modifier.height(8.dp))
+        }
+        item {
             LazyRow {
                 items(10) {
                     PlaceListItemComponent()

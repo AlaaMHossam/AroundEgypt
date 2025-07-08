@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -26,7 +26,9 @@ import com.alaa.hossam.aroundegypt.ui.R
 fun PlaceListItemComponent(modifier: Modifier = Modifier) {
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
-        modifier = Modifier.padding(horizontal = 8.dp)
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 8.dp)
     ) {
         Surface(
             shape = MaterialTheme.shapes.small,
@@ -45,8 +47,7 @@ fun PlaceListItemComponent(modifier: Modifier = Modifier) {
             // Main content
             Box(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight()
+                    .fillMaxSize()
                     .padding(8.dp)
             ) {
                 PlaceRecommendedComponent(modifier = Modifier.align(Alignment.TopStart))
