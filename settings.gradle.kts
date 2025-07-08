@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "Around Egypt"
 include(":app")
 include(":domain")
+include(":ui")
