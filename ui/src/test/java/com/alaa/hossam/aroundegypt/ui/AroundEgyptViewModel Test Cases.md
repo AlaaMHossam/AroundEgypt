@@ -1,3 +1,4 @@
 # Test Cases
 
 1. when_started_then_get_recommended_experiences_is_called
+2. when_update_recommended_experiences_is_called_then_recommended_experience_state_is_loading
