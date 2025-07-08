@@ -1,4 +1,4 @@
-package com.alaa.hossam.aroundegypt.ui.components.place
+package com.alaa.hossam.aroundegypt.ui.components.place_list_item
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

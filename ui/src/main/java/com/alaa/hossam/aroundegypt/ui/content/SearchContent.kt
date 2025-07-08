@@ -4,7 +4,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.alaa.hossam.aroundegypt.ui.components.place.PlaceListItemComponent
+import com.alaa.hossam.aroundegypt.ui.components.place_list_item.PlaceListItemComponent
 
 @Composable
 fun SearchContent(modifier: Modifier = Modifier) {

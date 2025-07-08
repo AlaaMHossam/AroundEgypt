@@ -1,4 +1,4 @@
-package com.alaa.hossam.aroundegypt.ui.components.place
+package com.alaa.hossam.aroundegypt.ui.components.place_list_item
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -24,9 +24,10 @@ import com.alaa.hossam.aroundegypt.ui.R
 
 @Composable
 fun PlaceListItemComponent(modifier: Modifier = Modifier) {
-    Column(verticalArrangement = Arrangement.spacedBy(16.dp),
-
-        modifier = Modifier.padding(horizontal = 8.dp)) {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        modifier = Modifier.padding(horizontal = 8.dp)
+    ) {
         Surface(
             shape = MaterialTheme.shapes.small,
             modifier = Modifier
@@ -75,7 +76,9 @@ fun PlaceListItemComponent(modifier: Modifier = Modifier) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 3.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 3.dp)
         ) {
             Text(text = "Nubian House")
             PlaceLikesComponent()
