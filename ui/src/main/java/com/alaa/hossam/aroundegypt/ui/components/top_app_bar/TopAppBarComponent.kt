@@ -24,6 +24,14 @@ fun TopAppBarComponent(modifier: Modifier = Modifier) {
                 )
             })
         SearchBarComponent()
+        IconButton(
+            onClick = {},
+            content = {
+                Icon(
+                    painter = painterResource(R.drawable.icn_filter),
+                    contentDescription = null
+                )
+            })
     }
 }
 
