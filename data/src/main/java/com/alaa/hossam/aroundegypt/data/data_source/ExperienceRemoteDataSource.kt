@@ -1,7 +1,9 @@
 package com.alaa.hossam.aroundegypt.data.data_source
 
+import com.alaa.hossam.aroundegypt.data.model.ExperienceResponse
 import com.alaa.hossam.aroundegypt.data.model.ExperiencesResponse
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ExperienceRemoteDataSource {
@@ -18,4 +20,9 @@ interface ExperienceRemoteDataSource {
     suspend fun search(
         @Query("filter[title]") searchText: String
     ): ExperiencesResponse
+
+    @GET("/api/v2/experiences/{id}")
+    suspend fun getExperience(
+        @Path("id") id: String
+    ): ExperienceResponse
 }

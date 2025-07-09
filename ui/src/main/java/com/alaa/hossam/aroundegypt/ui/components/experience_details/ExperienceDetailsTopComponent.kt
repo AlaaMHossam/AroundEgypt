@@ -1,6 +1,5 @@
 package com.alaa.hossam.aroundegypt.ui.components.experience_details
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
@@ -22,16 +21,21 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.alaa.hossam.aroundegypt.ui.R
 import com.alaa.hossam.aroundegypt.ui.components.experience_list_item.ExperienceViewsComponent
 import com.alaa.hossam.aroundegypt.ui.detailsTintColor
 
 @Composable
-fun ExperienceDetailsTopComponent(modifier: Modifier = Modifier) {
+fun ExperienceDetailsTopComponent(
+    modifier: Modifier = Modifier,
+    coverPhotoUrl: String,
+    views: Int
+) {
     Box(modifier = modifier.height(285.dp)) {
-        Image(
+        AsyncImage(
             modifier = Modifier.fillMaxSize(),
-            painter = painterResource(R.drawable.img_place_list_item_cover_dummy),
+            model = coverPhotoUrl,
             contentDescription = null,
             contentScale = ContentScale.FillBounds
         )
@@ -59,10 +63,12 @@ fun ExperienceDetailsTopComponent(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .align(alignment = Alignment.BottomStart)
                 .padding(8.dp),
-            views = 100
+            views = views
         )
         Icon(
-            modifier = Modifier.align(Alignment.BottomEnd) .padding(8.dp),
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(8.dp),
             painter = painterResource(R.drawable.icn_images),
             contentDescription = null,
             tint = MaterialTheme.colorScheme.surface
@@ -73,5 +79,5 @@ fun ExperienceDetailsTopComponent(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun ExperienceDetailsTopComponentPreview() {
-    ExperienceDetailsTopComponent()
+    ExperienceDetailsTopComponent(coverPhotoUrl = "", views = 100)
 }

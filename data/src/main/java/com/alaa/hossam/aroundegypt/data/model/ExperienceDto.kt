@@ -11,6 +11,12 @@ data class ExperiencesResponse(
 )
 
 @Serializable
+data class ExperienceResponse(
+    @SerialName("data")
+    val experiences: ExperienceDto
+)
+
+@Serializable
 data class ExperienceDto(
     @SerialName("id")
     val id: String = "",
@@ -22,8 +28,18 @@ data class ExperienceDto(
     val views: Int = 0,
     @SerialName("title")
     val title: String = "",
+    @SerialName("city")
+    val city: CityDto = CityDto(),
+    @SerialName("description")
+    val description: String = "",
     @SerialName("likes_no")
     val likes: Int = 0
+)
+
+@Serializable
+data class CityDto(
+    @SerialName("name")
+    val name: String = "",
 )
 
 fun ExperienceDto.toDomain(): Experience {
@@ -33,6 +49,8 @@ fun ExperienceDto.toDomain(): Experience {
         coverPhoto = coverPhoto,
         views = views,
         title = title,
+        city = city.name,
+        description = description,
         likes = likes
     )
 }

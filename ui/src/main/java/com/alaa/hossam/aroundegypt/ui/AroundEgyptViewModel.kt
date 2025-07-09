@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.alaa.hossam.aroundegypt.common_utils.DataState
 import com.alaa.hossam.aroundegypt.common_utils.UiState
 import com.alaa.hossam.aroundegypt.domain.model.Experience
+import com.alaa.hossam.aroundegypt.domain.usecase.GetExperienceUseCase
 import com.alaa.hossam.aroundegypt.domain.usecase.GetMostRecentExperiencesUseCase
 import com.alaa.hossam.aroundegypt.domain.usecase.GetRecommendedExperiencesUseCase
 import com.alaa.hossam.aroundegypt.domain.usecase.SearchUseCase
@@ -21,7 +22,8 @@ class AroundEgyptViewModel
 @Inject constructor(
     private val getRecommendedExperiencesUseCase: GetRecommendedExperiencesUseCase,
     private val getMostRecentExperiencesUseCase: GetMostRecentExperiencesUseCase,
-    private val searchUseCase: SearchUseCase
+    private val searchUseCase: SearchUseCase,
+    private val getExperienceUseCase: GetExperienceUseCase
 ) : ViewModel() {
 
     private val recommendedExperienceMutableUiState =
@@ -37,6 +39,9 @@ class AroundEgyptViewModel
 
     private val searchMutableState = MutableStateFlow<UiState<List<Experience>>>(UiState.Initial)
     val searchState = searchMutableState.asStateFlow()
+
+    private val experienceMutableState = MutableStateFlow<UiState<Experience>>(UiState.Initial)
+    val experienceState = experienceMutableState.asStateFlow()
 
     init {
         updateRecommendedExperiences()
@@ -64,6 +69,7 @@ class AroundEgyptViewModel
             when (result) {
                 is DataState.Success ->
                     mostRecentExperienceMutableUiState.update { UiState.Success(result.data) }
+
                 is DataState.Error ->
                     mostRecentExperienceMutableUiState.update { UiState.Error(result.message) }
             }
@@ -81,8 +87,23 @@ class AroundEgyptViewModel
             when (result) {
                 is DataState.Success ->
                     searchMutableState.update { UiState.Success(result.data) }
+
                 is DataState.Error ->
                     searchMutableState.update { UiState.Error(result.message) }
+            }
+        }
+    }
+
+    fun updateExperienceState(id: String) {
+        viewModelScope.launch {
+            experienceMutableState.update { UiState.Loading }
+            val result = getExperienceUseCase.invoke(id)
+            when (result) {
+                is DataState.Success ->
+                    experienceMutableState.update { UiState.Success(result.data) }
+
+                is DataState.Error ->
+                    experienceMutableState.update { UiState.Error(result.message) }
             }
         }
     }

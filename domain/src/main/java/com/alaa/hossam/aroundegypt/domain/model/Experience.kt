@@ -6,5 +6,7 @@ data class Experience(
     val coverPhoto: String = "",
     val views: Int = 0,
     val title: String = "",
+    val city: String = "",
+    val description: String = "",
     val likes: Int = 0
 )

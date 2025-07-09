@@ -13,6 +13,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.alaa.hossam.aroundegypt.common_utils.UiState
+import com.alaa.hossam.aroundegypt.domain.model.Experience
 import com.alaa.hossam.aroundegypt.ui.AroundEgyptViewModel
 import com.alaa.hossam.aroundegypt.ui.components.top_app_bar.TopAppBarComponent
 import com.alaa.hossam.aroundegypt.ui.content.HomeContent
@@ -29,10 +31,18 @@ fun HomeScreen(modifier: Modifier = Modifier, viewModel: AroundEgyptViewModel = 
 
     val searchUiState by viewModel.searchState.collectAsStateWithLifecycle()
 
+    val experience by viewModel.experienceState.collectAsStateWithLifecycle()
+
     var shouldShowExperienceDialog by remember { mutableStateOf(false) }
 
     if (shouldShowExperienceDialog)
-        ExperienceDialog(onDismiss = { shouldShowExperienceDialog = false })
+        ExperienceDialog(
+            onDismiss = { shouldShowExperienceDialog = false },
+            experience =
+                if (experience is UiState.Success<Experience>)
+                        (experience as UiState.Success<Experience>).data
+                else null
+        )
 
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -51,7 +61,10 @@ fun HomeScreen(modifier: Modifier = Modifier, viewModel: AroundEgyptViewModel = 
             is ContentUiState.Home -> HomeContent(
                 recommendedExperiencesUiState = recommendedExperiences,
                 mostRecentExperiencesUiState = mostRecentExperiences,
-                onExperienceClick = { shouldShowExperienceDialog = true }
+                onExperienceClick = {
+                    shouldShowExperienceDialog = true
+                    viewModel.updateExperienceState(it)
+                }
             )
 
             is ContentUiState.Search -> SearchContent(

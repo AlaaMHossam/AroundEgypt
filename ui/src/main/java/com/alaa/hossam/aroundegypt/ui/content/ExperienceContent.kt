@@ -15,20 +15,27 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.alaa.hossam.aroundegypt.domain.model.Experience
 import com.alaa.hossam.aroundegypt.ui.R
 import com.alaa.hossam.aroundegypt.ui.components.experience_details.ExperienceDetailsTopComponent
 
 @Composable
-fun ExperienceContent(modifier: Modifier = Modifier) {
+fun ExperienceContent(modifier: Modifier = Modifier, experience: Experience?) {
     Column {
-        ExperienceDetailsTopComponent()
+        ExperienceDetailsTopComponent(
+            modifier = modifier,
+            coverPhotoUrl = experience?.coverPhoto ?: "",
+            views = experience?.views ?: 0
+        )
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxWidth().padding(14.dp)
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(14.dp)
         ) {
             Column {
-                Text("Abu Simbel Temples")
-                Text("Aswan, Egypt.")
+                Text(experience?.title ?: "")
+                Text(experience?.city ?: "")
             }
             Row(verticalAlignment = Alignment.CenterVertically) {
                 IconButton(
@@ -49,14 +56,14 @@ fun ExperienceContent(modifier: Modifier = Modifier) {
                         )
                     })
 
-                Text("45")
+                Text(experience?.likes.toString())
             }
 
         }
         HorizontalDivider(modifier = Modifier.padding(horizontal = 14.dp))
         Column(modifier = Modifier.padding(14.dp)) {
             Text("Description")
-            Text("The Abu Simbel temples are two massive rock temples at Abu Simbel, a village in Nubia, southern Egypt, near the border with Sudan. They are situated on the western bank of Lake Nasser, about 230 km southwest of Aswan (about 300 km by road). The twin temples were originally carved out of the mountainside in the 13th century BC, during the 19th dynasty reign of the Pharaoh Ramesses II. They serve as a lasting monument to the king and his queen Nefertari, and commemorate his victory at the Battle of Kadesh. Their huge external rock relief figures have become iconic.")
+            Text(experience?.description ?: "")
         }
     }
 }
@@ -64,5 +71,5 @@ fun ExperienceContent(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun ExperienceContentPreview() {
-    ExperienceContent()
+    ExperienceContent(experience = Experience())
 }
