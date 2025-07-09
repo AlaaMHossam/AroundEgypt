@@ -51,7 +51,9 @@ fun ExperienceListItemComponent(modifier: Modifier = Modifier, experience: Exper
                     .fillMaxSize()
                     .padding(8.dp)
             ) {
-                ExperienceRecommendedComponent(modifier = Modifier.align(Alignment.TopStart))
+                if (experience.isRecommended)
+                    ExperienceRecommendedComponent(modifier = Modifier.align(Alignment.TopStart))
+
                 Icon(
                     modifier = Modifier.align(Alignment.TopEnd),
                     painter = painterResource(R.drawable.icn_information),
@@ -64,7 +66,7 @@ fun ExperienceListItemComponent(modifier: Modifier = Modifier, experience: Exper
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.surface
                 )
-                ExperienceViewsComponent(modifier = Modifier.align(Alignment.BottomStart))
+                ExperienceViewsComponent(modifier = Modifier.align(Alignment.BottomStart), views = experience.views)
                 Icon(
                     modifier = Modifier.align(Alignment.BottomEnd),
                     painter = painterResource(R.drawable.icn_images),
@@ -82,8 +84,8 @@ fun ExperienceListItemComponent(modifier: Modifier = Modifier, experience: Exper
                 .fillMaxWidth()
                 .padding(horizontal = 3.dp)
         ) {
-            Text(text = "Nubian House")
-            ExperienceLikesComponent()
+            Text(text = experience.title)
+            ExperienceLikesComponent(likes = experience.likes)
         }
     }
 }

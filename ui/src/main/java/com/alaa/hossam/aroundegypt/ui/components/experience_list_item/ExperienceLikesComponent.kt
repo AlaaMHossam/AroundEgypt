@@ -13,12 +13,12 @@ import androidx.compose.ui.unit.dp
 import com.alaa.hossam.aroundegypt.ui.R
 
 @Composable
-fun ExperienceLikesComponent(modifier: Modifier = Modifier) {
+fun ExperienceLikesComponent(modifier: Modifier = Modifier, likes: Int) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        Text(text = "372")
+        Text(text = likes.toString())
         Image(
             painter = painterResource(R.drawable.icn_favorite),
             contentDescription = null
@@ -29,6 +29,6 @@ fun ExperienceLikesComponent(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun ExperienceLikesComponentPreview() {
-    ExperienceLikesComponent()
+    ExperienceLikesComponent(likes = 100)
 
 }

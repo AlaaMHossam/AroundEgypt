@@ -14,22 +14,22 @@ data class ExperiencesResponse(
 data class ExperienceDto(
     @SerialName("id")
     val id: String = "",
-    @SerialName("is_recommended")
-    val isRecommended: Boolean = false,
+    @SerialName("recommended")
+    val isRecommended: Int = 0,
     @SerialName("cover_photo")
     val coverPhoto: String = "",
-    @SerialName("views")
+    @SerialName("views_no")
     val views: Int = 0,
     @SerialName("title")
     val title: String = "",
-    @SerialName("likes")
+    @SerialName("likes_no")
     val likes: Int = 0
 )
 
 fun ExperienceDto.toDomain(): Experience {
     return Experience(
         id = id,
-        isRecommended = isRecommended,
+        isRecommended = isRecommended == 1,
         coverPhoto = coverPhoto,
         views = views,
         title = title,

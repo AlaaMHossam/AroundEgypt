@@ -28,7 +28,7 @@ import com.alaa.hossam.aroundegypt.ui.detailsTintColor
 
 @Composable
 fun ExperienceDetailsTopComponent(modifier: Modifier = Modifier) {
-    Box(modifier = Modifier.height(285.dp)) {
+    Box(modifier = modifier.height(285.dp)) {
         Image(
             modifier = Modifier.fillMaxSize(),
             painter = painterResource(R.drawable.img_place_list_item_cover_dummy),
@@ -58,7 +58,8 @@ fun ExperienceDetailsTopComponent(modifier: Modifier = Modifier) {
         ExperienceViewsComponent(
             modifier = Modifier
                 .align(alignment = Alignment.BottomStart)
-                .padding(8.dp)
+                .padding(8.dp),
+            views = 100
         )
         Icon(
             modifier = Modifier.align(Alignment.BottomEnd) .padding(8.dp),

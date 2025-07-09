@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.alaa.hossam.aroundegypt.ui.R
 
 @Composable
-fun ExperienceViewsComponent(modifier: Modifier = Modifier) {
+fun ExperienceViewsComponent(modifier: Modifier = Modifier, views: Int) {
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically,
@@ -26,7 +26,7 @@ fun ExperienceViewsComponent(modifier: Modifier = Modifier) {
             tint = MaterialTheme.colorScheme.surface
         )
         Text(
-            text = "150",
+            text = views.toString(),
             color = MaterialTheme.colorScheme.surface
         )
     }
@@ -35,5 +35,5 @@ fun ExperienceViewsComponent(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun ExperienceViewsComponentPreview() {
-    ExperienceViewsComponent()
+    ExperienceViewsComponent(views = 100)
 }
