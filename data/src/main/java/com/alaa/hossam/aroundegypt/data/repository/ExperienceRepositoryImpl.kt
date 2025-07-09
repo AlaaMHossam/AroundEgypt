@@ -16,7 +16,7 @@ class ExperienceRepositoryImpl
     override suspend fun getRecommendedExperiences(): DataState<List<Experience>> =
         withContext(Dispatchers.IO) {
             try {
-                val result = experienceRemoteDataSource.getRecommendedExperiences()
+                val result = experienceRemoteDataSource.getRecommendedExperiences().experiences
                 return@withContext DataState.Success(result.map { it.toDomain() })
             } catch (exception: Exception) {
                 return@withContext DataState.Error(exception.message ?: "Unknown Error")

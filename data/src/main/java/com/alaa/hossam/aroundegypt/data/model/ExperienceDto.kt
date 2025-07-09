@@ -5,9 +5,15 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
+data class ExperiencesResponse(
+    @SerialName("data")
+    val experiences: List<ExperienceDto>
+)
+
+@Serializable
 data class ExperienceDto(
     @SerialName("id")
-    val id: Int = 0,
+    val id: String = "",
     @SerialName("is_recommended")
     val isRecommended: Boolean = false,
     @SerialName("cover_photo")

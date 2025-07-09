@@ -1,7 +1,7 @@
 package com.alaa.hossam.aroundegypt.domain.model
 
 data class Experience(
-    val id: Int = 0,
+    val id: String = "",
     val isRecommended: Boolean = false,
     val coverPhoto: String = "",
     val views: Int = 0,
