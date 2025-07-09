@@ -13,6 +13,7 @@ kotlin {
 }
 dependencies {
     implementation(project(":common_utils"))
+    implementation(libs.jetbrains.kotlinx.coroutines.core)
     testImplementation(libs.junit)
 
     // Mockk Dependencies
