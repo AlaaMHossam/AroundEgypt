@@ -14,7 +14,11 @@ import com.alaa.hossam.aroundegypt.ui.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBarComponent(modifier: Modifier = Modifier,  onSearchClick: (String) -> Unit) {
+fun TopAppBarComponent(
+    modifier: Modifier = Modifier,
+    onSearchClick: (String) -> Unit,
+    onCloseSearch: () -> Unit
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier.fillMaxWidth()
@@ -27,7 +31,7 @@ fun TopAppBarComponent(modifier: Modifier = Modifier,  onSearchClick: (String) -
                     contentDescription = null
                 )
             })
-        SearchBarComponent(onSearchClick = onSearchClick)
+        SearchBarComponent(onSearchClick = onSearchClick, onCloseSearch = onCloseSearch)
         IconButton(
             onClick = {},
             content = {
@@ -42,5 +46,5 @@ fun TopAppBarComponent(modifier: Modifier = Modifier,  onSearchClick: (String) -
 @Preview
 @Composable
 private fun TopAppBarComponentPreview() {
-    TopAppBarComponent(onSearchClick = {})
+    TopAppBarComponent(onSearchClick = {}, onCloseSearch = {})
 }

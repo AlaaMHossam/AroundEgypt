@@ -10,10 +10,12 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.alaa.hossam.aroundegypt.common_utils.UiState
 import com.alaa.hossam.aroundegypt.domain.model.Experience
+import com.alaa.hossam.aroundegypt.ui.HOME_CONTENT_TEST_TAG
 import com.alaa.hossam.aroundegypt.ui.components.experience_list_item.ExperienceListItemComponent
 
 @Composable
@@ -22,7 +24,7 @@ fun HomeContent(
     recommendedExperiencesUiState: UiState<List<Experience>>,
     mostRecentExperiencesUiState: UiState<List<Experience>>
 ) {
-    LazyColumn(modifier = modifier.fillMaxSize()) {
+    LazyColumn(modifier = modifier.fillMaxSize().testTag(HOME_CONTENT_TEST_TAG)) {
         item {
             // Title & Description
             Text(text = "Welcome!")

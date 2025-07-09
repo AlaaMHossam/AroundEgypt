@@ -30,16 +30,19 @@ fun HomeScreen(modifier: Modifier = Modifier, viewModel: AroundEgyptViewModel = 
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = modifier.fillMaxWidth()
     ) {
-        TopAppBarComponent(onSearchClick = {
-            viewModel.updateSearchState(it)
-            viewModel.updateContentUiState(ContentUiState.Search)
-        })
+        TopAppBarComponent(
+            onSearchClick = {
+                viewModel.updateSearchState(it)
+                viewModel.updateContentUiState(ContentUiState.Search)
+            },
+            onCloseSearch = { viewModel.updateContentUiState(ContentUiState.Home) })
 
-        when(contentUiState) {
+        when (contentUiState) {
             is ContentUiState.Home -> HomeContent(
                 recommendedExperiencesUiState = recommendedExperiences,
                 mostRecentExperiencesUiState = mostRecentExperiences
             )
+
             is ContentUiState.Search -> SearchContent(searchUiState = searchUiState)
         }
     }

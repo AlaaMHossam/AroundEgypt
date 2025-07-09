@@ -3,6 +3,7 @@ package com.alaa.hossam.aroundegypt.ui.components.top_app_bar
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -19,13 +20,17 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
+import com.alaa.hossam.aroundegypt.ui.CLEAR_SEARCH_BUTTON_TEST_TAG
 import com.alaa.hossam.aroundegypt.ui.R
 import com.alaa.hossam.aroundegypt.ui.SEARCH_FIELD_TEST_TAG
 import com.alaa.hossam.aroundegypt.ui.searchBgColor
 
 @Composable
-fun SearchBarComponent(modifier: Modifier = Modifier, onSearchClick: (String) -> Unit) {
-
+fun SearchBarComponent(
+    modifier: Modifier = Modifier,
+    onSearchClick: (String) -> Unit,
+    onCloseSearch: () -> Unit
+) {
     val keyboardController = LocalSoftwareKeyboardController.current
     var searchText by remember { mutableStateOf("") }
 
@@ -47,15 +52,31 @@ fun SearchBarComponent(modifier: Modifier = Modifier, onSearchClick: (String) ->
                 contentDescription = null
             )
         },
+        trailingIcon = {
+            IconButton(
+                modifier = Modifier.testTag(CLEAR_SEARCH_BUTTON_TEST_TAG),
+                onClick = {
+                    searchText = ""
+                    onCloseSearch()
+                },
+                content = {
+                    Icon(
+                        painter = painterResource(android.R.drawable.ic_menu_close_clear_cancel),
+                        contentDescription = null
+                    )
+                }
+            )
+        },
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
         keyboardActions = KeyboardActions(onSearch = {
             keyboardController?.hide()
-            onSearchClick(searchText) })
+            onSearchClick(searchText)
+        })
     )
 }
 
 @Preview
 @Composable
 private fun SearchBarComponentPreview() {
-    SearchBarComponent(onSearchClick = {})
+    SearchBarComponent(onSearchClick = {}, onCloseSearch = {})
 }
