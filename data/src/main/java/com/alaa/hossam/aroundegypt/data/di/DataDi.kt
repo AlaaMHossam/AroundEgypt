@@ -1,7 +1,10 @@
 package com.alaa.hossam.aroundegypt.data.di
 
 import android.content.Context
+import androidx.room.Room
 import com.alaa.hossam.aroundegypt.data.BuildConfig
+import com.alaa.hossam.aroundegypt.data.data_source.AppDB
+import com.alaa.hossam.aroundegypt.data.data_source.ExperienceDao
 import com.alaa.hossam.aroundegypt.data.data_source.ExperienceRemoteDataSource
 import com.alaa.hossam.aroundegypt.data.repository.ExperienceRepositoryImpl
 import com.alaa.hossam.aroundegypt.domain.repository.ExperienceRepository
@@ -22,7 +25,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class DataDi {
-    val cacheSize = 50L * 1024 * 1024 // 10 MB
+    val cacheSize = 50L * 1024 * 1024 // 50 MB
 
     @Provides
     @Singleton
@@ -74,8 +77,17 @@ class DataDi {
     internal fun providesExperienceRemoteDataSource(retrofit: Retrofit): ExperienceRemoteDataSource =
         retrofit.create(ExperienceRemoteDataSource::class.java)
 
+    @Provides
+    fun providesRoom(@ApplicationContext context: Context): AppDB =
+        Room.databaseBuilder(context, AppDB::class.java, "AppDB.db")
+            .build()
+
+    @Provides
+    fun providesExperienceDao(appDB: AppDB): ExperienceDao = appDB.experienceDao()
+
     @Singleton
     @Provides
-    fun providesExperienceRepository(experienceRemoteDataSource: ExperienceRemoteDataSource): ExperienceRepository =
-        ExperienceRepositoryImpl(experienceRemoteDataSource)
+    fun providesExperienceRepository(
+        experienceRemoteDataSource: ExperienceRemoteDataSource, experienceDao: ExperienceDao
+    ): ExperienceRepository = ExperienceRepositoryImpl(experienceRemoteDataSource, experienceDao)
 }

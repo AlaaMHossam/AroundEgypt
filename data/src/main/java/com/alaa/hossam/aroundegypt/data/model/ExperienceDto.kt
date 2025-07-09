@@ -60,3 +60,31 @@ fun ExperienceDto.toDomain(): Experience {
         likes = likes
     )
 }
+
+fun ExperienceDto.toEntity(fromIsRecommendedList: Int, fromIsMostRecentList: Int): ExperienceEntity {
+    return ExperienceEntity(
+        id = id,
+        isRecommended = isRecommended == 1,
+        coverPhoto = coverPhoto,
+        views = views,
+        title = title,
+        city = city.name,
+        description = description,
+        likes = likes,
+        fromIsRecommendedList = fromIsRecommendedList,
+        fromIsMostRecentList = fromIsMostRecentList
+    )
+}
+
+fun ExperienceEntity.toDomain(): Experience {
+    return Experience(
+        id = id,
+        isRecommended = isRecommended,
+        coverPhoto = coverPhoto,
+        views = views,
+        title = title,
+        city = city,
+        description = description,
+        likes = likes
+    )
+}
