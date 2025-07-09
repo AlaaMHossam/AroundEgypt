@@ -3,6 +3,7 @@ package com.alaa.hossam.aroundegypt.ui
 import com.alaa.hossam.aroundegypt.common_utils.DataState
 import com.alaa.hossam.aroundegypt.common_utils.UiState
 import com.alaa.hossam.aroundegypt.domain.model.Experience
+import com.alaa.hossam.aroundegypt.domain.usecase.GetMostRecentExperiencesUseCase
 import com.alaa.hossam.aroundegypt.domain.usecase.GetRecommendedExperiencesUseCase
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -24,12 +25,18 @@ class AroundEgyptViewModelTest {
     private val mockGetRecommendedExperiencesUseCase =
         mockk<GetRecommendedExperiencesUseCase>(relaxed = true)
 
+    private val mockGetMostRecentExperiencesUseCase =
+        mockk<GetMostRecentExperiencesUseCase>(relaxed = true)
+
     @Test
-    fun when_started_then_get_recommended_experiences_is_called() = runTest{
+    fun when_started_then_get_recommended_experiences_is_called() = runTest {
         // Given
 
         // When
-        AroundEgyptViewModel(mockGetRecommendedExperiencesUseCase)
+        AroundEgyptViewModel(
+            getRecommendedExperiencesUseCase = mockGetRecommendedExperiencesUseCase,
+            getMostRecentExperiencesUseCase = mockGetMostRecentExperiencesUseCase
+        )
 
         // Then
         advanceUntilIdle()
@@ -41,7 +48,10 @@ class AroundEgyptViewModelTest {
     fun when_update_recommended_experiences_is_called_then_recommended_experience_state_is_loading() =
         runTest {
             // Given
-            val aroundEgyptViewModel = AroundEgyptViewModel(mockGetRecommendedExperiencesUseCase)
+            val aroundEgyptViewModel =  AroundEgyptViewModel(
+                getRecommendedExperiencesUseCase = mockGetRecommendedExperiencesUseCase,
+                getMostRecentExperiencesUseCase = mockGetMostRecentExperiencesUseCase
+            )
             val collectionList = mutableListOf<UiState<List<Experience>>>()
             backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {
                 aroundEgyptViewModel.recommendedExperienceUiState.collect {
@@ -58,44 +68,67 @@ class AroundEgyptViewModelTest {
         }
 
     @Test
-    fun when_get_recommended_experiences_use_case_is_success_then_recommended_experience_state_is_success() = runTest {
-        // Given
-        coEvery { mockGetRecommendedExperiencesUseCase.invoke() } returns DataState.Success(
-            emptyList()
-        )
-        val aroundEgyptViewModel = AroundEgyptViewModel(mockGetRecommendedExperiencesUseCase)
-        val collectionList = mutableListOf<UiState<List<Experience>>>()
-        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {
-            aroundEgyptViewModel.recommendedExperienceUiState.collect {
-                collectionList.add(it)
+    fun when_get_recommended_experiences_use_case_is_success_then_recommended_experience_state_is_success() =
+        runTest {
+            // Given
+            coEvery { mockGetRecommendedExperiencesUseCase.invoke() } returns DataState.Success(
+                emptyList()
+            )
+            val aroundEgyptViewModel =  AroundEgyptViewModel(
+                getRecommendedExperiencesUseCase = mockGetRecommendedExperiencesUseCase,
+                getMostRecentExperiencesUseCase = mockGetMostRecentExperiencesUseCase
+            )
+            val collectionList = mutableListOf<UiState<List<Experience>>>()
+            backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {
+                aroundEgyptViewModel.recommendedExperienceUiState.collect {
+                    collectionList.add(it)
+                }
             }
+
+            // When
+            advanceUntilIdle()
+            val result = collectionList[2]
+
+            // Then
+            assert(result is UiState.Success)
         }
-
-        // When
-        advanceUntilIdle()
-        val result = collectionList[2]
-
-        // Then
-        assert(result is UiState.Success)
-    }
 
     @Test
-    fun when_get_recommended_experiences_use_case_is_error_then_recommended_experience_state_is_error() = runTest{
-        // Given
-        coEvery { mockGetRecommendedExperiencesUseCase.invoke() } returns DataState.Error("Error")
-        val aroundEgyptViewModel = AroundEgyptViewModel(mockGetRecommendedExperiencesUseCase)
-        val collectionList = mutableListOf<UiState<List<Experience>>>()
-        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {
-            aroundEgyptViewModel.recommendedExperienceUiState.collect {
-                collectionList.add(it)
+    fun when_get_recommended_experiences_use_case_is_error_then_recommended_experience_state_is_error() =
+        runTest {
+            // Given
+            coEvery { mockGetRecommendedExperiencesUseCase.invoke() } returns DataState.Error("Error")
+            val aroundEgyptViewModel =  AroundEgyptViewModel(
+                getRecommendedExperiencesUseCase = mockGetRecommendedExperiencesUseCase,
+                getMostRecentExperiencesUseCase = mockGetMostRecentExperiencesUseCase
+            )
+            val collectionList = mutableListOf<UiState<List<Experience>>>()
+            backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {
+                aroundEgyptViewModel.recommendedExperienceUiState.collect {
+                    collectionList.add(it)
+                }
             }
+
+            // When
+            advanceUntilIdle()
+            val result = collectionList[2]
+
+            // Then
+            assert(result is UiState.Error)
         }
 
+    @Test
+    fun when_started_then_get_most_recent_experiences_is_called() = runTest {
+        // Given
+
         // When
-        advanceUntilIdle()
-        val result = collectionList[2]
+        AroundEgyptViewModel(
+            getRecommendedExperiencesUseCase = mockGetRecommendedExperiencesUseCase,
+            getMostRecentExperiencesUseCase = mockGetMostRecentExperiencesUseCase
+        )
 
         // Then
-        assert(result is UiState.Error)
+        advanceUntilIdle()
+        coVerify { mockGetMostRecentExperiencesUseCase.invoke() }
     }
 }

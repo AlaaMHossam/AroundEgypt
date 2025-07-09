@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.alaa.hossam.aroundegypt.common_utils.DataState
 import com.alaa.hossam.aroundegypt.common_utils.UiState
 import com.alaa.hossam.aroundegypt.domain.model.Experience
+import com.alaa.hossam.aroundegypt.domain.usecase.GetMostRecentExperiencesUseCase
 import com.alaa.hossam.aroundegypt.domain.usecase.GetRecommendedExperiencesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,7 +16,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AroundEgyptViewModel
-@Inject constructor(private val getRecommendedExperiencesUseCase: GetRecommendedExperiencesUseCase) :
+@Inject constructor(
+    private val getRecommendedExperiencesUseCase: GetRecommendedExperiencesUseCase,
+    private val getMostRecentExperiencesUseCase: GetMostRecentExperiencesUseCase
+) :
     ViewModel() {
 
     private val recommendedExperienceMutableUiState =
@@ -24,6 +28,7 @@ class AroundEgyptViewModel
 
     init {
         updateRecommendedExperiences()
+        updateMostRecentExperiences()
     }
 
     private fun updateRecommendedExperiences() {
@@ -37,6 +42,12 @@ class AroundEgyptViewModel
                 is DataState.Error ->
                     recommendedExperienceMutableUiState.update { UiState.Error(result.message) }
             }
+        }
+    }
+
+    private fun updateMostRecentExperiences() {
+        viewModelScope.launch {
+            getMostRecentExperiencesUseCase.invoke()
         }
     }
 }
