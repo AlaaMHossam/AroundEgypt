@@ -68,4 +68,8 @@ class AroundEgyptViewModel
     fun updateContentUiState(contentUiState: ContentUiState) {
         contentMutableUiState.update { contentUiState }
     }
+
+    fun updateSearchState(searchText: String) {
+
+    }
 }

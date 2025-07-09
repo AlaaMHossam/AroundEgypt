@@ -2,3 +2,4 @@
 
 1. when_show_search_state_then_search_content_is_displayed
 2. when_search_ime_action_called_then_search_content_is_displayed
+3. when_search_ime_action_called_then_search_called_in_view_model

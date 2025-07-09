@@ -12,7 +12,9 @@ import com.alaa.hossam.aroundegypt.ui.SEARCH_CONTENT_TEST_TAG
 import com.alaa.hossam.aroundegypt.ui.SEARCH_FIELD_TEST_TAG
 import com.alaa.hossam.aroundegypt.ui.states.ContentUiState
 import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.mockk
+import io.mockk.spyk
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -27,20 +29,22 @@ class HomeScreenTest {
     private val mockGetMostRecentExperiencesUseCase =
         mockk<GetMostRecentExperiencesUseCase>(relaxed = true)
 
-    private lateinit var viewModel: AroundEgyptViewModel
+    private lateinit var spyViewModel: AroundEgyptViewModel
 
     @Before
     fun setUp() {
         coEvery { mockGetRecommendedExperiencesUseCase.invoke() } returns DataState.Success(listOf())
         coEvery { mockGetMostRecentExperiencesUseCase.invoke() } returns DataState.Success(listOf())
 
-        viewModel = AroundEgyptViewModel(
-            getRecommendedExperiencesUseCase = mockGetRecommendedExperiencesUseCase,
-            getMostRecentExperiencesUseCase = mockGetMostRecentExperiencesUseCase
+        spyViewModel = spyk(
+            AroundEgyptViewModel(
+                getRecommendedExperiencesUseCase = mockGetRecommendedExperiencesUseCase,
+                getMostRecentExperiencesUseCase = mockGetMostRecentExperiencesUseCase
+            )
         )
 
         composeTestRule.setContent {
-            HomeScreen(viewModel = viewModel)
+            HomeScreen(viewModel = spyViewModel)
         }
     }
 
@@ -49,7 +53,7 @@ class HomeScreenTest {
         // Given
 
         // When
-        viewModel.updateContentUiState(ContentUiState.Search)
+        spyViewModel.updateContentUiState(ContentUiState.Search)
 
         // Then
         composeTestRule.onNodeWithTag(SEARCH_CONTENT_TEST_TAG).assertExists()
@@ -65,5 +69,18 @@ class HomeScreenTest {
 
         // Then
         composeTestRule.onNodeWithTag(SEARCH_CONTENT_TEST_TAG).assertExists()
+    }
+
+    @Test
+    fun when_search_ime_action_called_then_search_called_in_view_model() {
+        // Given
+        val searchText = "Luxor"
+        composeTestRule.onNodeWithTag(SEARCH_FIELD_TEST_TAG).performTextInput(searchText)
+
+        // When
+        composeTestRule.onNodeWithTag(SEARCH_FIELD_TEST_TAG).performImeAction()
+
+        // Then
+        coVerify { spyViewModel.updateSearchState(searchText) }
     }
 }
