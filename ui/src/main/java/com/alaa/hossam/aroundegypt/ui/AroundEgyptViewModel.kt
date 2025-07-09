@@ -52,7 +52,13 @@ class AroundEgyptViewModel
     private fun updateMostRecentExperiences() {
         viewModelScope.launch {
             mostRecentExperienceMutableUiState.update { UiState.Loading }
-            getMostRecentExperiencesUseCase.invoke()
+            val result = getMostRecentExperiencesUseCase.invoke()
+            when (result) {
+                is DataState.Success ->
+                    mostRecentExperienceMutableUiState.update { UiState.Success(result.data) }
+                is DataState.Error ->
+                    mostRecentExperienceMutableUiState.update { UiState.Error(result.message) }
+            }
         }
     }
 }

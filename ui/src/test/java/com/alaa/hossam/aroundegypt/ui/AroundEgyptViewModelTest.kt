@@ -154,4 +154,54 @@ class AroundEgyptViewModelTest {
             // Then
             assert(result is UiState.Loading)
         }
+
+    @Test
+    fun when_get_most_recent_experiences_use_case_is_success_then_most_recent_experience_state_is_success() =
+        runTest {
+            // Given
+            coEvery { mockGetMostRecentExperiencesUseCase.invoke() } returns DataState.Success(
+                emptyList()
+            )
+            val aroundEgyptViewModel = AroundEgyptViewModel(
+                getRecommendedExperiencesUseCase = mockGetRecommendedExperiencesUseCase,
+                getMostRecentExperiencesUseCase = mockGetMostRecentExperiencesUseCase
+            )
+            val collectionList = mutableListOf<UiState<List<Experience>>>()
+            backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {
+                aroundEgyptViewModel.mostRecentExperienceUiState.collect {
+                    collectionList.add(it)
+                }
+            }
+
+            // When
+            advanceUntilIdle()
+            val result = collectionList[2]
+
+            // Then
+            assert(result is UiState.Success)
+        }
+
+    @Test
+    fun when_get_most_recent_experiences_use_case_is_error_then_most_recent_experience_state_is_error() =
+        runTest {
+            // Given
+            coEvery { mockGetMostRecentExperiencesUseCase.invoke() } returns DataState.Error("Error")
+            val aroundEgyptViewModel = AroundEgyptViewModel(
+                getRecommendedExperiencesUseCase = mockGetRecommendedExperiencesUseCase,
+                getMostRecentExperiencesUseCase = mockGetMostRecentExperiencesUseCase
+            )
+            val collectionList = mutableListOf<UiState<List<Experience>>>()
+            backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {
+                aroundEgyptViewModel.mostRecentExperienceUiState.collect {
+                    collectionList.add(it)
+                }
+            }
+
+            // When
+            advanceUntilIdle()
+            val result = collectionList[2]
+
+            // Then
+            assert(result is UiState.Error)
+        }
 }
