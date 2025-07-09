@@ -1,6 +1,5 @@
 package com.alaa.hossam.aroundegypt.ui.components.experience_list_item
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,10 +19,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
+import com.alaa.hossam.aroundegypt.domain.model.Experience
 import com.alaa.hossam.aroundegypt.ui.R
 
 @Composable
-fun ExperienceListItemComponent(modifier: Modifier = Modifier) {
+fun ExperienceListItemComponent(modifier: Modifier = Modifier, experience: Experience) {
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = modifier
@@ -37,9 +38,9 @@ fun ExperienceListItemComponent(modifier: Modifier = Modifier) {
                 .height(154.dp)
         ) {
             // Background
-            Image(
+            AsyncImage(
+                model = experience.coverPhoto,
                 modifier = Modifier.fillMaxWidth(),
-                painter = painterResource(R.drawable.img_place_list_item_cover_dummy),
                 contentDescription = null,
                 contentScale = ContentScale.Crop
             )
@@ -90,5 +91,5 @@ fun ExperienceListItemComponent(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun ExperienceListItemComponentPreview() {
-    ExperienceListItemComponent()
+    ExperienceListItemComponent(experience = Experience())
 }
