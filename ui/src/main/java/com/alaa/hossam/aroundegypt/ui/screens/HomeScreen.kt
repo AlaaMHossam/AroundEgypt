@@ -13,9 +13,13 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.alaa.hossam.aroundegypt.ui.AroundEgyptViewModel
 import com.alaa.hossam.aroundegypt.ui.components.top_app_bar.TopAppBarComponent
 import com.alaa.hossam.aroundegypt.ui.content.HomeContent
+import com.alaa.hossam.aroundegypt.ui.content.SearchContent
+import com.alaa.hossam.aroundegypt.ui.states.ContentUiState
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier, viewModel: AroundEgyptViewModel = hiltViewModel()) {
+
+    val contentUiState by viewModel.contentUiState.collectAsStateWithLifecycle()
 
     val recommendedExperiences by viewModel.recommendedExperienceUiState.collectAsStateWithLifecycle()
     val mostRecentExperiences by viewModel.recommendedExperienceUiState.collectAsStateWithLifecycle()
@@ -25,10 +29,14 @@ fun HomeScreen(modifier: Modifier = Modifier, viewModel: AroundEgyptViewModel = 
         modifier = modifier.fillMaxWidth()
     ) {
         TopAppBarComponent()
-        HomeContent(
-            recommendedExperiencesUiState = recommendedExperiences,
-            mostRecentExperiencesUiState = mostRecentExperiences
-        )
+
+        when(contentUiState) {
+            is ContentUiState.Home -> HomeContent(
+                recommendedExperiencesUiState = recommendedExperiences,
+                mostRecentExperiencesUiState = mostRecentExperiences
+            )
+            is ContentUiState.Search -> SearchContent()
+        }
     }
 }
 

@@ -40,6 +40,11 @@ android {
     buildFeatures {
         compose = true
     }
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1,LICENSE.md,LICENSE-notice.md}"
+        }
+    }
 }
 
 dependencies {
@@ -70,6 +75,9 @@ dependencies {
     // Mockk Dependencies
     testImplementation(libs.mockk.android)
     testImplementation(libs.mockk.agent)
+
+    androidTestImplementation(libs.mockk.android)
+    androidTestImplementation(libs.mockk.agent)
 
     // HILT Dependencies
     implementation(libs.hilt.android)

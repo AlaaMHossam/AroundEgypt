@@ -7,6 +7,7 @@ import com.alaa.hossam.aroundegypt.common_utils.UiState
 import com.alaa.hossam.aroundegypt.domain.model.Experience
 import com.alaa.hossam.aroundegypt.domain.usecase.GetMostRecentExperiencesUseCase
 import com.alaa.hossam.aroundegypt.domain.usecase.GetRecommendedExperiencesUseCase
+import com.alaa.hossam.aroundegypt.ui.states.ContentUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -19,8 +20,7 @@ class AroundEgyptViewModel
 @Inject constructor(
     private val getRecommendedExperiencesUseCase: GetRecommendedExperiencesUseCase,
     private val getMostRecentExperiencesUseCase: GetMostRecentExperiencesUseCase
-) :
-    ViewModel() {
+) : ViewModel() {
 
     private val recommendedExperienceMutableUiState =
         MutableStateFlow<UiState<List<Experience>>>(UiState.Initial)
@@ -29,6 +29,9 @@ class AroundEgyptViewModel
     private val mostRecentExperienceMutableUiState =
         MutableStateFlow<UiState<List<Experience>>>(UiState.Initial)
     val mostRecentExperienceUiState = mostRecentExperienceMutableUiState.asStateFlow()
+
+    private val contentMutableUiState = MutableStateFlow<ContentUiState>(ContentUiState.Home)
+    val contentUiState = contentMutableUiState.asStateFlow()
 
     init {
         updateRecommendedExperiences()
@@ -60,5 +63,9 @@ class AroundEgyptViewModel
                     mostRecentExperienceMutableUiState.update { UiState.Error(result.message) }
             }
         }
+    }
+
+    fun updateContentUiState(contentUiState: ContentUiState) {
+        contentMutableUiState.update { contentUiState }
     }
 }
