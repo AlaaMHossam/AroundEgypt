@@ -266,4 +266,30 @@ class AroundEgyptViewModelTest {
             // Then
             assert(result is UiState.Success)
         }
+
+    @Test
+    fun when_search_use_case_is_error_then_search_state_is_error() = runTest {
+        // Given
+        val searchText = "Luxor"
+        coEvery { mockSearchUseCase.invoke(searchText) } returns DataState.Error("Error")
+        val aroundEgyptViewModel = AroundEgyptViewModel(
+            getRecommendedExperiencesUseCase = mockGetRecommendedExperiencesUseCase,
+            getMostRecentExperiencesUseCase = mockGetMostRecentExperiencesUseCase,
+            searchUseCase = mockSearchUseCase
+        )
+        val collectionList = mutableListOf<UiState<List<Experience>>>()
+        backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {
+            aroundEgyptViewModel.searchState.collect {
+                collectionList.add(it)
+            }
+        }
+
+        // When
+        aroundEgyptViewModel.updateSearchState(searchText)
+        advanceUntilIdle()
+        val result = collectionList[2]
+
+        // Then
+        assert(result is UiState.Error)
+    }
 }

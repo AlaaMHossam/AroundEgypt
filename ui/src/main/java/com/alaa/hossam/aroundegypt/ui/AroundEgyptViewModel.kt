@@ -81,7 +81,8 @@ class AroundEgyptViewModel
             when (result) {
                 is DataState.Success ->
                     searchMutableState.update { UiState.Success(result.data) }
-                is DataState.Error -> {}
+                is DataState.Error ->
+                    searchMutableState.update { UiState.Error(result.message) }
             }
         }
     }
