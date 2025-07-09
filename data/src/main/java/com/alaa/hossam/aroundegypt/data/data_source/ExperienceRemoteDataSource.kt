@@ -10,4 +10,7 @@ interface ExperienceRemoteDataSource {
     suspend fun getRecommendedExperiences(
         @Query("filter[recommended]") recommended: Boolean = true
     ): ExperiencesResponse
+
+    @GET("/api/v2/experiences")
+    suspend fun getMostRecentExperiences(): ExperiencesResponse
 }

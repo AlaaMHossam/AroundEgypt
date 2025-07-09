@@ -22,4 +22,14 @@ class ExperienceRepositoryImpl
                 return@withContext DataState.Error(exception.message ?: "Unknown Error")
             }
         }
+
+    override suspend fun getMostRecentExperiences(): DataState<List<Experience>> =
+        withContext(Dispatchers.IO) {
+            try {
+                val result = experienceRemoteDataSource.getMostRecentExperiences().experiences
+                return@withContext DataState.Success(result.map { it.toDomain() })
+            } catch (exception: Exception) {
+                return@withContext DataState.Error(exception.message ?: "Unknown Error")
+            }
+        }
 }
