@@ -5,7 +5,7 @@ import com.alaa.hossam.aroundegypt.domain.model.Experience
 import com.alaa.hossam.aroundegypt.domain.repository.ExperienceRepository
 
 class SearchUseCase(private val experienceRepository: ExperienceRepository) {
-    suspend operator fun invoke(query: String): DataState<List<Experience>> {
-        return DataState.Success(emptyList())
+    suspend operator fun invoke(searchText: String): DataState<List<Experience>> {
+        return experienceRepository.search(searchText)
     }
 }
