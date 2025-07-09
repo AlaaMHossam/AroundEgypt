@@ -5,8 +5,8 @@ import com.alaa.hossam.aroundegypt.common_utils.UiState
 import com.alaa.hossam.aroundegypt.domain.model.Experience
 import com.alaa.hossam.aroundegypt.domain.usecase.GetRecommendedExperiencesUseCase
 import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.mockk
-import io.mockk.verify
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -33,7 +33,7 @@ class AroundEgyptViewModelTest {
 
         // Then
         advanceUntilIdle()
-        verify { mockGetRecommendedExperiencesUseCase.invoke() }
+        coVerify { mockGetRecommendedExperiencesUseCase.invoke() }
     }
 
 

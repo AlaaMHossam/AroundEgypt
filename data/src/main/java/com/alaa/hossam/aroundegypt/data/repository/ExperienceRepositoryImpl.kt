@@ -1,16 +1,23 @@
 package com.alaa.hossam.aroundegypt.data.repository
 
 import com.alaa.hossam.aroundegypt.common_utils.DataState
+import com.alaa.hossam.aroundegypt.data.data_source.ExperienceRemoteDataSource
+import com.alaa.hossam.aroundegypt.data.model.toDomain
 import com.alaa.hossam.aroundegypt.domain.model.Experience
 import com.alaa.hossam.aroundegypt.domain.repository.ExperienceRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class ExperienceRepositoryImpl : ExperienceRepository {
+class ExperienceRepositoryImpl
+@Inject constructor(private val experienceRemoteDataSource: ExperienceRemoteDataSource) :
+    ExperienceRepository {
+
     override suspend fun getRecommendedExperiences(): DataState<List<Experience>> =
         withContext(Dispatchers.IO) {
             try {
-                return@withContext DataState.Success(listOf())
+                val result = experienceRemoteDataSource.getRecommendedExperiences()
+                return@withContext DataState.Success(result.map { it.toDomain() })
             } catch (exception: Exception) {
                 return@withContext DataState.Error(exception.message ?: "Unknown Error")
             }

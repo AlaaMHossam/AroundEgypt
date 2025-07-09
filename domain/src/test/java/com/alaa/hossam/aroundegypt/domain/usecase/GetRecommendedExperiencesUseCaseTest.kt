@@ -3,6 +3,7 @@ package com.alaa.hossam.aroundegypt.domain.usecase
 import com.alaa.hossam.aroundegypt.domain.repository.ExperienceRepository
 import io.mockk.coVerify
 import io.mockk.mockk
+import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
 class GetRecommendedExperiencesUseCaseTest {
@@ -16,7 +17,7 @@ class GetRecommendedExperiencesUseCaseTest {
             GetRecommendedExperiencesUseCase(mockExperienceRepository)
 
         // When
-        getRecommendedExperiencesUseCase.invoke()
+        runBlocking {getRecommendedExperiencesUseCase.invoke() }
 
         // Then
         coVerify { mockExperienceRepository.getRecommendedExperiences() }
