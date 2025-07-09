@@ -32,4 +32,14 @@ class ExperienceRepositoryImpl
                 return@withContext DataState.Error(exception.message ?: "Unknown Error")
             }
         }
+
+    override suspend fun search(searchText: String): DataState<List<Experience>> =
+        withContext(Dispatchers.IO){
+            try {
+                val result = experienceRemoteDataSource.search(searchText).experiences
+                return@withContext DataState.Success(result.map { it.toDomain() })
+            }catch (exception: Exception){
+                return@withContext DataState.Error(exception.message ?: "Unknown Error")
+            }
+        }
 }

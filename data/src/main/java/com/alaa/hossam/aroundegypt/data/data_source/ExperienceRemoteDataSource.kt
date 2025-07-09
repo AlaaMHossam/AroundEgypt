@@ -13,4 +13,9 @@ interface ExperienceRemoteDataSource {
 
     @GET("/api/v2/experiences")
     suspend fun getMostRecentExperiences(): ExperiencesResponse
+
+    @GET("/api/v2/experiences")
+    suspend fun search(
+        @Query("filter[title]") searchText: String
+    ): ExperiencesResponse
 }
