@@ -1,8 +1,10 @@
 package com.alaa.hossam.aroundegypt.ui.content
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -30,7 +32,9 @@ fun HomeContent(
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
-            .testTag(HOME_CONTENT_TEST_TAG)
+            .padding(horizontal = 16.dp)
+            .testTag(HOME_CONTENT_TEST_TAG),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         item {
             // Title & Description
@@ -53,7 +57,7 @@ fun HomeContent(
                     CircularProgressIndicator()
 
                 recommendedExperiencesUiState is UiState.Success ->
-                    LazyRow {
+                    LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         items(
                             items = recommendedExperiencesUiState.data as List<Experience>,
                             key = { experience -> experience.id }
@@ -86,10 +90,12 @@ fun HomeContent(
                     items = mostRecentExperiencesUiState.data as List<Experience>,
                     key = { experience -> experience.id }
                 ) { experience ->
+                    Spacer(Modifier.height(8.dp))
                     ExperienceListItemComponent(
                         experience = experience,
                         onCLick = onExperienceClick
                     )
+                    Spacer(Modifier.height(8.dp))
                 }
 
             mostRecentExperiencesUiState is UiState.Error ->
