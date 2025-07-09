@@ -6,6 +6,6 @@ import com.alaa.hossam.aroundegypt.domain.repository.ExperienceRepository
 
 class GetMostRecentExperiencesUseCase(private val experienceRepository: ExperienceRepository) {
     suspend operator fun invoke(): DataState<List<Experience>> {
-        return DataState.Success(emptyList())
+        return experienceRepository.getMostRecentExperiences()
     }
 }
