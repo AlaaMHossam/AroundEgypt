@@ -29,7 +29,8 @@ import com.alaa.hossam.aroundegypt.ui.searchBgColor
 fun SearchBarComponent(
     modifier: Modifier = Modifier,
     onSearchClick: (String) -> Unit,
-    onCloseSearch: () -> Unit
+    onCloseSearch: () -> Unit,
+    shouldShowCloseButton: Boolean
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     var searchText by remember { mutableStateOf("") }
@@ -53,19 +54,20 @@ fun SearchBarComponent(
             )
         },
         trailingIcon = {
-            IconButton(
-                modifier = Modifier.testTag(CLEAR_SEARCH_BUTTON_TEST_TAG),
-                onClick = {
-                    searchText = ""
-                    onCloseSearch()
-                },
-                content = {
-                    Icon(
-                        painter = painterResource(android.R.drawable.ic_menu_close_clear_cancel),
-                        contentDescription = null
-                    )
-                }
-            )
+            if (shouldShowCloseButton)
+                IconButton(
+                    modifier = Modifier.testTag(CLEAR_SEARCH_BUTTON_TEST_TAG),
+                    onClick = {
+                        searchText = ""
+                        onCloseSearch()
+                    },
+                    content = {
+                        Icon(
+                            painter = painterResource(android.R.drawable.ic_menu_close_clear_cancel),
+                            contentDescription = null
+                        )
+                    }
+                )
         },
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
         keyboardActions = KeyboardActions(onSearch = {
@@ -78,5 +80,5 @@ fun SearchBarComponent(
 @Preview
 @Composable
 private fun SearchBarComponentPreview() {
-    SearchBarComponent(onSearchClick = {}, onCloseSearch = {})
+    SearchBarComponent(onSearchClick = {}, onCloseSearch = {}, shouldShowCloseButton = false)
 }

@@ -35,7 +35,9 @@ fun HomeScreen(modifier: Modifier = Modifier, viewModel: AroundEgyptViewModel = 
                 viewModel.updateSearchState(it)
                 viewModel.updateContentUiState(ContentUiState.Search)
             },
-            onCloseSearch = { viewModel.updateContentUiState(ContentUiState.Home) })
+            onCloseSearch = { viewModel.updateContentUiState(ContentUiState.Home) },
+            shouldShowCloseButton = contentUiState is ContentUiState.Search
+        )
 
         when (contentUiState) {
             is ContentUiState.Home -> HomeContent(

@@ -17,7 +17,8 @@ import com.alaa.hossam.aroundegypt.ui.R
 fun TopAppBarComponent(
     modifier: Modifier = Modifier,
     onSearchClick: (String) -> Unit,
-    onCloseSearch: () -> Unit
+    onCloseSearch: () -> Unit,
+    shouldShowCloseButton: Boolean
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -31,7 +32,11 @@ fun TopAppBarComponent(
                     contentDescription = null
                 )
             })
-        SearchBarComponent(onSearchClick = onSearchClick, onCloseSearch = onCloseSearch)
+        SearchBarComponent(
+            onSearchClick = onSearchClick,
+            onCloseSearch = onCloseSearch,
+            shouldShowCloseButton = shouldShowCloseButton
+        )
         IconButton(
             onClick = {},
             content = {
@@ -46,5 +51,5 @@ fun TopAppBarComponent(
 @Preview
 @Composable
 private fun TopAppBarComponentPreview() {
-    TopAppBarComponent(onSearchClick = {}, onCloseSearch = {})
+    TopAppBarComponent(onSearchClick = {}, onCloseSearch = {}, shouldShowCloseButton = false)
 }
