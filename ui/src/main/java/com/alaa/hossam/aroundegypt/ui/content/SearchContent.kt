@@ -15,20 +15,31 @@ import com.alaa.hossam.aroundegypt.ui.SEARCH_CONTENT_TEST_TAG
 import com.alaa.hossam.aroundegypt.ui.components.experience_list_item.ExperienceListItemComponent
 
 @Composable
-fun SearchContent(modifier: Modifier = Modifier, searchUiState: UiState<List<Experience>>) {
+fun SearchContent(
+    modifier: Modifier = Modifier,
+    searchUiState: UiState<List<Experience>>,
+    onExperienceClick: (id: String) -> Unit
+) {
     when {
         searchUiState is UiState.Loading -> CircularProgressIndicator()
         searchUiState is UiState.Success ->
             if ((searchUiState.data as List<Experience>).isEmpty())
                 Text(text = "No results found")
             else
-                LazyColumn(modifier = modifier
-                    .fillMaxSize()
-                    .testTag(SEARCH_CONTENT_TEST_TAG)) {
+                LazyColumn(
+                    modifier = modifier
+                        .fillMaxSize()
+                        .testTag(SEARCH_CONTENT_TEST_TAG)
+                ) {
                     items(
                         items = searchUiState.data as List<Experience>,
                         key = { experience -> experience.id }
-                    ) { experience -> ExperienceListItemComponent(experience = experience) }
+                    ) { experience ->
+                        ExperienceListItemComponent(
+                            experience = experience,
+                            onCLick = onExperienceClick
+                        )
+                    }
                 }
 
         searchUiState is UiState.Error -> Text(text = searchUiState.message)
@@ -38,5 +49,7 @@ fun SearchContent(modifier: Modifier = Modifier, searchUiState: UiState<List<Exp
 @Preview
 @Composable
 private fun SearchContentPreview() {
-    SearchContent(searchUiState = UiState.Success(List(3) { Experience(id = it.toString()) }))
+    SearchContent(
+        searchUiState = UiState.Success(List(3) { Experience(id = it.toString()) }),
+        onExperienceClick = {})
 }

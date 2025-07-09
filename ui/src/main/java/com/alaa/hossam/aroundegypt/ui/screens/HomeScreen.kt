@@ -5,6 +5,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -26,6 +29,11 @@ fun HomeScreen(modifier: Modifier = Modifier, viewModel: AroundEgyptViewModel = 
 
     val searchUiState by viewModel.searchState.collectAsStateWithLifecycle()
 
+    var shouldShowExperienceDialog by remember { mutableStateOf(false) }
+
+    if (shouldShowExperienceDialog)
+        ExperienceDialog(onDismiss = { shouldShowExperienceDialog = false })
+
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = modifier.fillMaxWidth()
@@ -42,10 +50,13 @@ fun HomeScreen(modifier: Modifier = Modifier, viewModel: AroundEgyptViewModel = 
         when (contentUiState) {
             is ContentUiState.Home -> HomeContent(
                 recommendedExperiencesUiState = recommendedExperiences,
-                mostRecentExperiencesUiState = mostRecentExperiences
+                mostRecentExperiencesUiState = mostRecentExperiences,
+                onExperienceClick = { shouldShowExperienceDialog = true }
             )
 
-            is ContentUiState.Search -> SearchContent(searchUiState = searchUiState)
+            is ContentUiState.Search -> SearchContent(
+                searchUiState = searchUiState,
+                onExperienceClick = { shouldShowExperienceDialog = true })
         }
     }
 }

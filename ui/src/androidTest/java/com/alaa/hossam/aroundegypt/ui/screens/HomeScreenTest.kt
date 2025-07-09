@@ -7,11 +7,14 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performImeAction
 import androidx.compose.ui.test.performTextInput
 import com.alaa.hossam.aroundegypt.common_utils.DataState
+import com.alaa.hossam.aroundegypt.domain.model.Experience
 import com.alaa.hossam.aroundegypt.domain.usecase.GetMostRecentExperiencesUseCase
 import com.alaa.hossam.aroundegypt.domain.usecase.GetRecommendedExperiencesUseCase
 import com.alaa.hossam.aroundegypt.domain.usecase.SearchUseCase
 import com.alaa.hossam.aroundegypt.ui.AroundEgyptViewModel
 import com.alaa.hossam.aroundegypt.ui.CLEAR_SEARCH_BUTTON_TEST_TAG
+import com.alaa.hossam.aroundegypt.ui.EXPERIENCE_DIALOG_TEST_TAG
+import com.alaa.hossam.aroundegypt.ui.EXPERIENCE_LIST_ITEM_TEST_TAG
 import com.alaa.hossam.aroundegypt.ui.HOME_CONTENT_TEST_TAG
 import com.alaa.hossam.aroundegypt.ui.SEARCH_CONTENT_TEST_TAG
 import com.alaa.hossam.aroundegypt.ui.SEARCH_FIELD_TEST_TAG
@@ -39,8 +42,10 @@ class HomeScreenTest {
 
     @Before
     fun setUp() {
-        coEvery { mockGetRecommendedExperiencesUseCase.invoke() } returns DataState.Success(listOf())
-        coEvery { mockGetMostRecentExperiencesUseCase.invoke() } returns DataState.Success(listOf())
+        coEvery { mockGetRecommendedExperiencesUseCase.invoke() } returns
+                DataState.Success(listOf(Experience("1")))
+        coEvery { mockGetMostRecentExperiencesUseCase.invoke() } returns
+                DataState.Success(listOf())
 
         spyViewModel = spyk(
             AroundEgyptViewModel(
@@ -104,5 +109,16 @@ class HomeScreenTest {
 
         // Then
         composeTestRule.onNodeWithTag(HOME_CONTENT_TEST_TAG).assertIsDisplayed()
+    }
+
+    @Test
+    fun when_experience_clicked_then_experience_details_is_displayed() {
+        // Given
+
+        // When
+        composeTestRule.onNodeWithTag(EXPERIENCE_LIST_ITEM_TEST_TAG).performClick()
+
+        // Then
+        composeTestRule.onNodeWithTag(EXPERIENCE_DIALOG_TEST_TAG).assertIsDisplayed()
     }
 }

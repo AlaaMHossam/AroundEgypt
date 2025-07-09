@@ -1,5 +1,6 @@
 package com.alaa.hossam.aroundegypt.ui.components.experience_list_item
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,20 +17,28 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.alaa.hossam.aroundegypt.domain.model.Experience
+import com.alaa.hossam.aroundegypt.ui.EXPERIENCE_LIST_ITEM_TEST_TAG
 import com.alaa.hossam.aroundegypt.ui.R
 
 @Composable
-fun ExperienceListItemComponent(modifier: Modifier = Modifier, experience: Experience) {
+fun ExperienceListItemComponent(
+    modifier: Modifier = Modifier,
+    experience: Experience,
+    onCLick: (String) -> Unit
+) {
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = modifier
+            .clickable { onCLick(experience.id) }
             .fillMaxWidth()
             .padding(horizontal = 8.dp)
+            .testTag(EXPERIENCE_LIST_ITEM_TEST_TAG)
     ) {
         Surface(
             shape = MaterialTheme.shapes.small,
@@ -93,5 +102,5 @@ fun ExperienceListItemComponent(modifier: Modifier = Modifier, experience: Exper
 @Preview
 @Composable
 private fun ExperienceListItemComponentPreview() {
-    ExperienceListItemComponent(experience = Experience())
+    ExperienceListItemComponent(experience = Experience(), onCLick = {})
 }

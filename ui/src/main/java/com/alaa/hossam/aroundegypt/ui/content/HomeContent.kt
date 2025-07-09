@@ -22,9 +22,14 @@ import com.alaa.hossam.aroundegypt.ui.components.experience_list_item.Experience
 fun HomeContent(
     modifier: Modifier = Modifier,
     recommendedExperiencesUiState: UiState<List<Experience>>,
-    mostRecentExperiencesUiState: UiState<List<Experience>>
+    mostRecentExperiencesUiState: UiState<List<Experience>>,
+    onExperienceClick: (id: String) -> Unit
 ) {
-    LazyColumn(modifier = modifier.fillMaxSize().testTag(HOME_CONTENT_TEST_TAG)) {
+    LazyColumn(
+        modifier = modifier
+            .fillMaxSize()
+            .testTag(HOME_CONTENT_TEST_TAG)
+    ) {
         item {
             // Title & Description
             Text(text = "Welcome!")
@@ -47,7 +52,10 @@ fun HomeContent(
                             items = recommendedExperiencesUiState.data as List<Experience>,
                             key = { experience -> experience.id }
                         ) { experience ->
-                            ExperienceListItemComponent(experience = experience)
+                            ExperienceListItemComponent(
+                                experience = experience,
+                                onCLick = onExperienceClick
+                            )
                         }
                     }
 
@@ -72,7 +80,10 @@ fun HomeContent(
                     items = mostRecentExperiencesUiState.data as List<Experience>,
                     key = { experience -> experience.id }
                 ) { experience ->
-                    ExperienceListItemComponent(experience = experience)
+                    ExperienceListItemComponent(
+                        experience = experience,
+                        onCLick = onExperienceClick
+                    )
                 }
 
             mostRecentExperiencesUiState is UiState.Error ->
@@ -87,5 +98,6 @@ private fun HomeContentPreview() {
     HomeContent(
         recommendedExperiencesUiState = UiState.Initial,
         mostRecentExperiencesUiState = UiState.Initial,
+        onExperienceClick = {}
     )
 }

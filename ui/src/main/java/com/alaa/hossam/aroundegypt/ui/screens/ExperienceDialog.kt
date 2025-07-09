@@ -5,14 +5,17 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
+import com.alaa.hossam.aroundegypt.ui.EXPERIENCE_DIALOG_TEST_TAG
 import com.alaa.hossam.aroundegypt.ui.content.ExperienceContent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ExperienceDialog(modifier: Modifier = Modifier) {
+fun ExperienceDialog(modifier: Modifier = Modifier, onDismiss: () -> Unit) {
     ModalBottomSheet(
-        onDismissRequest = {},
+        modifier = modifier.testTag(EXPERIENCE_DIALOG_TEST_TAG),
+        onDismissRequest = { onDismiss() },
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
         dragHandle = null,
         content = { ExperienceContent() })
@@ -21,5 +24,5 @@ fun ExperienceDialog(modifier: Modifier = Modifier) {
 @Preview
 @Composable
 private fun ExperienceDialogPreview() {
-    ExperienceDialog()
+    ExperienceDialog(onDismiss = {})
 }
