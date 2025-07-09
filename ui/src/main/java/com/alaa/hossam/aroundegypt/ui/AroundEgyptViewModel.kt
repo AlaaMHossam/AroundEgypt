@@ -26,6 +26,10 @@ class AroundEgyptViewModel
         MutableStateFlow<UiState<List<Experience>>>(UiState.Initial)
     val recommendedExperienceUiState = recommendedExperienceMutableUiState.asStateFlow()
 
+    private val mostRecentExperienceMutableUiState =
+        MutableStateFlow<UiState<List<Experience>>>(UiState.Initial)
+    val mostRecentExperienceUiState = mostRecentExperienceMutableUiState.asStateFlow()
+
     init {
         updateRecommendedExperiences()
         updateMostRecentExperiences()
@@ -47,6 +51,7 @@ class AroundEgyptViewModel
 
     private fun updateMostRecentExperiences() {
         viewModelScope.launch {
+            mostRecentExperienceMutableUiState.update { UiState.Loading }
             getMostRecentExperiencesUseCase.invoke()
         }
     }
