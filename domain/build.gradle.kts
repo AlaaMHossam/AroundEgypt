@@ -14,4 +14,8 @@ kotlin {
 dependencies {
     implementation(project(":common_utils"))
     testImplementation(libs.junit)
+
+    // Mockk Dependencies
+    testImplementation(libs.mockk)
+    testImplementation(libs.mockk.agent)
 }
