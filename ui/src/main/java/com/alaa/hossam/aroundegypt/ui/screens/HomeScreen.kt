@@ -22,7 +22,7 @@ fun HomeScreen(modifier: Modifier = Modifier, viewModel: AroundEgyptViewModel = 
     val contentUiState by viewModel.contentUiState.collectAsStateWithLifecycle()
 
     val recommendedExperiences by viewModel.recommendedExperienceUiState.collectAsStateWithLifecycle()
-    val mostRecentExperiences by viewModel.recommendedExperienceUiState.collectAsStateWithLifecycle()
+    val mostRecentExperiences by viewModel.mostRecentExperienceUiState.collectAsStateWithLifecycle()
 
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
