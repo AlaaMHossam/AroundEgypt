@@ -5,7 +5,7 @@ import com.alaa.hossam.aroundegypt.domain.model.Experience
 import com.alaa.hossam.aroundegypt.domain.repository.ExperienceRepository
 
 class GetRecommendedExperiencesUseCase(private val experienceRepository: ExperienceRepository) {
-    operator fun invoke(): DataState<List<Experience>> {
+   suspend operator fun invoke(): DataState<List<Experience>> {
         return experienceRepository.getRecommendedExperiences()
     }
 }
