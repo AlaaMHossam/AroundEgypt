@@ -24,6 +24,8 @@ fun HomeScreen(modifier: Modifier = Modifier, viewModel: AroundEgyptViewModel = 
     val recommendedExperiences by viewModel.recommendedExperienceUiState.collectAsStateWithLifecycle()
     val mostRecentExperiences by viewModel.mostRecentExperienceUiState.collectAsStateWithLifecycle()
 
+    val searchUiState by viewModel.searchState.collectAsStateWithLifecycle()
+
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = modifier.fillMaxWidth()
@@ -38,7 +40,7 @@ fun HomeScreen(modifier: Modifier = Modifier, viewModel: AroundEgyptViewModel = 
                 recommendedExperiencesUiState = recommendedExperiences,
                 mostRecentExperiencesUiState = mostRecentExperiences
             )
-            is ContentUiState.Search -> SearchContent()
+            is ContentUiState.Search -> SearchContent(searchUiState = searchUiState)
         }
     }
 }
