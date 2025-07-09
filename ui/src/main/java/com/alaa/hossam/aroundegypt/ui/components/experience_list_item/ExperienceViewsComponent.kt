@@ -9,8 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.alaa.hossam.aroundegypt.ui.R
 
 @Composable
@@ -27,7 +29,9 @@ fun ExperienceViewsComponent(modifier: Modifier = Modifier, views: Int) {
         )
         Text(
             text = views.toString(),
-            color = MaterialTheme.colorScheme.surface
+            color = MaterialTheme.colorScheme.surface,
+            fontSize = 14.sp,
+            fontWeight = FontWeight.Medium
         )
     }
 }

@@ -19,8 +19,10 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.alaa.hossam.aroundegypt.ui.R
 import com.alaa.hossam.aroundegypt.ui.components.experience_list_item.ExperienceViewsComponent
@@ -44,7 +46,14 @@ fun ExperienceDetailsTopComponent(
             colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.surface),
             modifier = Modifier.align(Alignment.Center),
             onClick = {},
-            content = { Text("EXPLORE NOW", color = detailsTintColor) })
+            content = {
+                Text(
+                    "EXPLORE NOW",
+                    color = detailsTintColor,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            })
         Spacer(
             modifier = Modifier
                 .fillMaxWidth()

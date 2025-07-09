@@ -11,8 +11,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.alaa.hossam.aroundegypt.common_utils.UiState
 import com.alaa.hossam.aroundegypt.domain.model.Experience
 import com.alaa.hossam.aroundegypt.ui.HOME_CONTENT_TEST_TAG
@@ -32,12 +34,16 @@ fun HomeContent(
     ) {
         item {
             // Title & Description
-            Text(text = "Welcome!")
-            Text(text = "Now you can explore any experience in 360 degrees and get all the details about it all in one place.")
+            Text(text = "Welcome!", fontSize = 22.sp, fontWeight = FontWeight.Bold)
+            Text(
+                text = "Now you can explore any experience in 360 degrees and get all the details about it all in one place.",
+                fontSize = 14.sp,
+                fontWeight = FontWeight.Medium
+            )
         }
         item {
             Spacer(Modifier.height(32.dp))
-            Text(text = "Recommended Experiences")
+            Text(text = "Recommended Experiences", fontSize = 22.sp, fontWeight = FontWeight.Bold)
             Spacer(Modifier.height(8.dp))
         }
 
@@ -66,7 +72,7 @@ fun HomeContent(
 
         item {
             Spacer(Modifier.height(32.dp))
-            Text(text = "Most Recent")
+            Text(text = "Most Recent", fontSize = 22.sp, fontWeight = FontWeight.Bold)
             Spacer(Modifier.height(8.dp))
         }
 

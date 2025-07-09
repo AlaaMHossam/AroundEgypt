@@ -13,8 +13,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.alaa.hossam.aroundegypt.domain.model.Experience
 import com.alaa.hossam.aroundegypt.ui.R
 import com.alaa.hossam.aroundegypt.ui.components.experience_details.ExperienceDetailsTopComponent
@@ -38,8 +40,8 @@ fun ExperienceContent(
                 .padding(14.dp)
         ) {
             Column {
-                Text(experience?.title ?: "")
-                Text(experience?.city ?: "")
+                Text(experience?.title ?: "", fontSize = 16.sp, fontWeight = FontWeight.Bold)
+                Text(experience?.city ?: "", fontSize = 16.sp, fontWeight = FontWeight.Medium)
             }
             Row(verticalAlignment = Alignment.CenterVertically) {
                 IconButton(
@@ -60,14 +62,18 @@ fun ExperienceContent(
                         )
                     })
 
-                Text(experience?.likes.toString())
+                Text(
+                    text = experience?.likes.toString(),
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Medium
+                )
             }
 
         }
         HorizontalDivider(modifier = Modifier.padding(horizontal = 14.dp))
         Column(modifier = Modifier.padding(14.dp)) {
-            Text("Description")
-            Text(experience?.description ?: "")
+            Text("Description", fontSize = 22.sp, fontWeight = FontWeight.Bold)
+            Text(experience?.description ?: "", fontSize = 14.sp, fontWeight = FontWeight.Medium)
         }
     }
 }
