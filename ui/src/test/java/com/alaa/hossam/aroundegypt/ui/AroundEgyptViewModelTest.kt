@@ -40,7 +40,8 @@ class AroundEgyptViewModelTest {
             getRecommendedExperiencesUseCase = mockGetRecommendedExperiencesUseCase,
             getMostRecentExperiencesUseCase = mockGetMostRecentExperiencesUseCase,
             searchUseCase = mockSearchUseCase,
-            getExperienceUseCase = mockk(relaxed = true)
+            getExperienceUseCase = mockk(relaxed = true),
+            favoriteExperienceUseCase = mockk(relaxed = true)
         )
 
         // Then
@@ -57,7 +58,8 @@ class AroundEgyptViewModelTest {
                 getRecommendedExperiencesUseCase = mockGetRecommendedExperiencesUseCase,
                 getMostRecentExperiencesUseCase = mockGetMostRecentExperiencesUseCase,
                 searchUseCase = mockSearchUseCase,
-                getExperienceUseCase = mockk(relaxed = true)
+                getExperienceUseCase = mockk(relaxed = true),
+                favoriteExperienceUseCase = mockk(relaxed = true)
             )
             val collectionList = mutableListOf<UiState<List<Experience>>>()
             backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {
@@ -85,7 +87,8 @@ class AroundEgyptViewModelTest {
                 getRecommendedExperiencesUseCase = mockGetRecommendedExperiencesUseCase,
                 getMostRecentExperiencesUseCase = mockGetMostRecentExperiencesUseCase,
                 searchUseCase = mockSearchUseCase,
-                getExperienceUseCase = mockk(relaxed = true)
+                getExperienceUseCase = mockk(relaxed = true),
+                favoriteExperienceUseCase = mockk(relaxed = true)
             )
             val collectionList = mutableListOf<UiState<List<Experience>>>()
             backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {
@@ -111,7 +114,8 @@ class AroundEgyptViewModelTest {
                 getRecommendedExperiencesUseCase = mockGetRecommendedExperiencesUseCase,
                 getMostRecentExperiencesUseCase = mockGetMostRecentExperiencesUseCase,
                 searchUseCase = mockSearchUseCase,
-                getExperienceUseCase = mockk(relaxed = true)
+                getExperienceUseCase = mockk(relaxed = true),
+                favoriteExperienceUseCase = mockk(relaxed = true)
             )
             val collectionList = mutableListOf<UiState<List<Experience>>>()
             backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {
@@ -137,7 +141,8 @@ class AroundEgyptViewModelTest {
             getRecommendedExperiencesUseCase = mockGetRecommendedExperiencesUseCase,
             getMostRecentExperiencesUseCase = mockGetMostRecentExperiencesUseCase,
             searchUseCase = mockSearchUseCase,
-            getExperienceUseCase = mockk(relaxed = true)
+            getExperienceUseCase = mockk(relaxed = true),
+            favoriteExperienceUseCase = mockk(relaxed = true)
         )
 
         // Then
@@ -153,7 +158,8 @@ class AroundEgyptViewModelTest {
                 getRecommendedExperiencesUseCase = mockGetRecommendedExperiencesUseCase,
                 getMostRecentExperiencesUseCase = mockGetMostRecentExperiencesUseCase,
                 searchUseCase = mockSearchUseCase,
-                getExperienceUseCase = mockk(relaxed = true)
+                getExperienceUseCase = mockk(relaxed = true),
+                favoriteExperienceUseCase = mockk(relaxed = true)
             )
             val collectionList = mutableListOf<UiState<List<Experience>>>()
             backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {
@@ -181,7 +187,8 @@ class AroundEgyptViewModelTest {
                 getRecommendedExperiencesUseCase = mockGetRecommendedExperiencesUseCase,
                 getMostRecentExperiencesUseCase = mockGetMostRecentExperiencesUseCase,
                 searchUseCase = mockSearchUseCase,
-                getExperienceUseCase = mockk(relaxed = true)
+                getExperienceUseCase = mockk(relaxed = true),
+                favoriteExperienceUseCase = mockk(relaxed = true)
             )
             val collectionList = mutableListOf<UiState<List<Experience>>>()
             backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {
@@ -207,7 +214,8 @@ class AroundEgyptViewModelTest {
                 getRecommendedExperiencesUseCase = mockGetRecommendedExperiencesUseCase,
                 getMostRecentExperiencesUseCase = mockGetMostRecentExperiencesUseCase,
                 searchUseCase = mockSearchUseCase,
-                getExperienceUseCase = mockk(relaxed = true)
+                getExperienceUseCase = mockk(relaxed = true),
+                favoriteExperienceUseCase = mockk(relaxed = true)
             )
             val collectionList = mutableListOf<UiState<List<Experience>>>()
             backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {
@@ -231,7 +239,8 @@ class AroundEgyptViewModelTest {
             getRecommendedExperiencesUseCase = mockGetRecommendedExperiencesUseCase,
             getMostRecentExperiencesUseCase = mockGetMostRecentExperiencesUseCase,
             searchUseCase = mockSearchUseCase,
-            getExperienceUseCase = mockk(relaxed = true)
+            getExperienceUseCase = mockk(relaxed = true),
+            favoriteExperienceUseCase = mockk(relaxed = true)
         )
         val collectionList = mutableListOf<UiState<List<Experience>>>()
         backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {
@@ -259,7 +268,8 @@ class AroundEgyptViewModelTest {
                 getRecommendedExperiencesUseCase = mockGetRecommendedExperiencesUseCase,
                 getMostRecentExperiencesUseCase = mockGetMostRecentExperiencesUseCase,
                 searchUseCase = mockSearchUseCase,
-                getExperienceUseCase = mockk(relaxed = true)
+                getExperienceUseCase = mockk(relaxed = true),
+                favoriteExperienceUseCase = mockk(relaxed = true)
             )
             val collectionList = mutableListOf<UiState<List<Experience>>>()
             backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {
@@ -286,7 +296,8 @@ class AroundEgyptViewModelTest {
             getRecommendedExperiencesUseCase = mockGetRecommendedExperiencesUseCase,
             getMostRecentExperiencesUseCase = mockGetMostRecentExperiencesUseCase,
             searchUseCase = mockSearchUseCase,
-            getExperienceUseCase = mockk(relaxed = true)
+            getExperienceUseCase = mockk(relaxed = true),
+            favoriteExperienceUseCase = mockk(relaxed = true)
         )
         val collectionList = mutableListOf<UiState<List<Experience>>>()
         backgroundScope.launch(UnconfinedTestDispatcher(testScheduler)) {

@@ -51,7 +51,9 @@ class HomeScreenTest {
             AroundEgyptViewModel(
                 getRecommendedExperiencesUseCase = mockGetRecommendedExperiencesUseCase,
                 getMostRecentExperiencesUseCase = mockGetMostRecentExperiencesUseCase,
-                searchUseCase = mockSearchUseCase
+                searchUseCase = mockSearchUseCase,
+                getExperienceUseCase = mockk(relaxed = true),
+                favoriteExperienceUseCase = mockk(relaxed = true)
             )
         )
 
