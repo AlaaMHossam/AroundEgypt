@@ -53,4 +53,14 @@ class ExperienceRepositoryImpl
             }
 
     }
+
+    override suspend fun favoriteExperience(id: String): DataState<Int> =
+        withContext(Dispatchers.IO) {
+            try {
+                val result = experienceRemoteDataSource.favoriteExperience(id)
+                return@withContext DataState.Success(result.data)
+            }catch (exception: Exception){
+                return@withContext DataState.Error(exception.message ?: "Unknown Error")
+            }
+        }
 }

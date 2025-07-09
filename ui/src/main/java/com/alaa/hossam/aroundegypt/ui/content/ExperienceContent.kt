@@ -20,7 +20,11 @@ import com.alaa.hossam.aroundegypt.ui.R
 import com.alaa.hossam.aroundegypt.ui.components.experience_details.ExperienceDetailsTopComponent
 
 @Composable
-fun ExperienceContent(modifier: Modifier = Modifier, experience: Experience?) {
+fun ExperienceContent(
+    modifier: Modifier = Modifier,
+    experience: Experience?,
+    onFavoriteClick: (String) -> Unit
+) {
     Column {
         ExperienceDetailsTopComponent(
             modifier = modifier,
@@ -48,7 +52,7 @@ fun ExperienceContent(modifier: Modifier = Modifier, experience: Experience?) {
                     })
 
                 IconButton(
-                    onClick = {},
+                    onClick = { experience?.id?.let { onFavoriteClick(it) } },
                     content = {
                         Image(
                             painter = painterResource(R.drawable.icn_action_favorite),
@@ -71,5 +75,5 @@ fun ExperienceContent(modifier: Modifier = Modifier, experience: Experience?) {
 @Preview
 @Composable
 private fun ExperienceContentPreview() {
-    ExperienceContent(experience = Experience())
+    ExperienceContent(experience = Experience(), onFavoriteClick = {})
 }

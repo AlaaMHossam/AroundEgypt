@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.alaa.hossam.aroundegypt.common_utils.DataState
 import com.alaa.hossam.aroundegypt.common_utils.UiState
 import com.alaa.hossam.aroundegypt.domain.model.Experience
+import com.alaa.hossam.aroundegypt.domain.usecase.FavoriteExperienceUseCase
 import com.alaa.hossam.aroundegypt.domain.usecase.GetExperienceUseCase
 import com.alaa.hossam.aroundegypt.domain.usecase.GetMostRecentExperiencesUseCase
 import com.alaa.hossam.aroundegypt.domain.usecase.GetRecommendedExperiencesUseCase
@@ -23,7 +24,8 @@ class AroundEgyptViewModel
     private val getRecommendedExperiencesUseCase: GetRecommendedExperiencesUseCase,
     private val getMostRecentExperiencesUseCase: GetMostRecentExperiencesUseCase,
     private val searchUseCase: SearchUseCase,
-    private val getExperienceUseCase: GetExperienceUseCase
+    private val getExperienceUseCase: GetExperienceUseCase,
+    private val favoriteExperienceUseCase: FavoriteExperienceUseCase
 ) : ViewModel() {
 
     private val recommendedExperienceMutableUiState =
@@ -42,6 +44,9 @@ class AroundEgyptViewModel
 
     private val experienceMutableState = MutableStateFlow<UiState<Experience>>(UiState.Initial)
     val experienceState = experienceMutableState.asStateFlow()
+
+    private val favoritesMutableState = MutableStateFlow(0)
+    val favoritesState = favoritesMutableState.asStateFlow()
 
     init {
         updateRecommendedExperiences()
@@ -104,6 +109,19 @@ class AroundEgyptViewModel
 
                 is DataState.Error ->
                     experienceMutableState.update { UiState.Error(result.message) }
+            }
+        }
+    }
+
+    fun addExperienceToFavorites(id: String) {
+        viewModelScope.launch {
+            val result = favoriteExperienceUseCase.invoke(id)
+            when (result) {
+                is DataState.Success ->
+                    favoritesMutableState.update {result.data}
+
+                is DataState.Error ->
+                    favoritesMutableState.update { 0 }
             }
         }
     }

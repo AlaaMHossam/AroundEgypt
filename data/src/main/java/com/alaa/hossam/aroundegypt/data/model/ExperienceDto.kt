@@ -17,6 +17,12 @@ data class ExperienceResponse(
 )
 
 @Serializable
+data class ExperienceFavoriteDto(
+    @SerialName("data")
+    val `data`: Int
+)
+
+@Serializable
 data class ExperienceDto(
     @SerialName("id")
     val id: String = "",

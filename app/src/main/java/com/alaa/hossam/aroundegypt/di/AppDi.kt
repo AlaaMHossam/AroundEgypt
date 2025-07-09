@@ -1,6 +1,7 @@
 package com.alaa.hossam.aroundegypt.di
 
 import com.alaa.hossam.aroundegypt.domain.repository.ExperienceRepository
+import com.alaa.hossam.aroundegypt.domain.usecase.FavoriteExperienceUseCase
 import com.alaa.hossam.aroundegypt.domain.usecase.GetExperienceUseCase
 import com.alaa.hossam.aroundegypt.domain.usecase.GetMostRecentExperiencesUseCase
 import com.alaa.hossam.aroundegypt.domain.usecase.GetRecommendedExperiencesUseCase
@@ -36,5 +37,10 @@ class AppDi {
     @Provides
     fun providesGetExperienceUseCase(experienceRepository: ExperienceRepository):
             GetExperienceUseCase = GetExperienceUseCase(experienceRepository)
+
+    @Singleton
+    @Provides
+    fun providesFavoriteExperienceUseCase(experienceRepository: ExperienceRepository):
+            FavoriteExperienceUseCase = FavoriteExperienceUseCase(experienceRepository)
 
 }

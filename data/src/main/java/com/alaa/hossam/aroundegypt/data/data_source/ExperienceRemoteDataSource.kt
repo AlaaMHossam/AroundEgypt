@@ -1,8 +1,10 @@
 package com.alaa.hossam.aroundegypt.data.data_source
 
+import com.alaa.hossam.aroundegypt.data.model.ExperienceFavoriteDto
 import com.alaa.hossam.aroundegypt.data.model.ExperienceResponse
 import com.alaa.hossam.aroundegypt.data.model.ExperiencesResponse
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -25,4 +27,9 @@ interface ExperienceRemoteDataSource {
     suspend fun getExperience(
         @Path("id") id: String
     ): ExperienceResponse
+
+    @POST("/api/v2/experiences/{id}/like")
+    suspend fun favoriteExperience(
+        @Path("id") id: String
+    ): ExperienceFavoriteDto
 }

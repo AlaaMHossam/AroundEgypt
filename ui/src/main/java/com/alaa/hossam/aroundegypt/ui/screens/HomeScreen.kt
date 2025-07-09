@@ -40,9 +40,9 @@ fun HomeScreen(modifier: Modifier = Modifier, viewModel: AroundEgyptViewModel = 
             onDismiss = { shouldShowExperienceDialog = false },
             experience =
                 if (experience is UiState.Success<Experience>)
-                        (experience as UiState.Success<Experience>).data
-                else null
-        )
+                    (experience as UiState.Success<Experience>).data
+                else null,
+            onFavoriteClick = { viewModel.addExperienceToFavorites(it) })
 
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),

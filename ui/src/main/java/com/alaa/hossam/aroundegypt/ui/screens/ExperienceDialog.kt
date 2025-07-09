@@ -16,18 +16,19 @@ import com.alaa.hossam.aroundegypt.ui.content.ExperienceContent
 fun ExperienceDialog(
     modifier: Modifier = Modifier,
     onDismiss: () -> Unit,
-    experience: Experience?
+    experience: Experience?,
+    onFavoriteClick: (String) -> Unit
 ) {
     ModalBottomSheet(
         modifier = modifier.testTag(EXPERIENCE_DIALOG_TEST_TAG),
         onDismissRequest = { onDismiss() },
         sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
         dragHandle = null,
-        content = { ExperienceContent(experience = experience) })
+        content = { ExperienceContent(experience = experience,onFavoriteClick = onFavoriteClick) })
 }
 
 @Preview
 @Composable
 private fun ExperienceDialogPreview() {
-    ExperienceDialog(onDismiss = {}, experience = Experience())
+    ExperienceDialog(onDismiss = {}, experience = Experience()) {}
 }

@@ -8,4 +8,5 @@ interface ExperienceRepository {
     suspend fun getMostRecentExperiences(): DataState<List<Experience>>
     suspend fun search(searchText: String): DataState<List<Experience>>
     suspend fun getExperience(id: String): DataState<Experience>
+    suspend fun favoriteExperience(id: String): DataState<Int>
 }
