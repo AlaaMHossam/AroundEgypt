@@ -18,13 +18,17 @@ import com.alaa.hossam.aroundegypt.ui.content.HomeContent
 fun HomeScreen(modifier: Modifier = Modifier, viewModel: AroundEgyptViewModel = hiltViewModel()) {
 
     val recommendedExperiences by viewModel.recommendedExperienceUiState.collectAsStateWithLifecycle()
+    val mostRecentExperiences by viewModel.recommendedExperienceUiState.collectAsStateWithLifecycle()
 
     Column(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = modifier.fillMaxWidth()
     ) {
         TopAppBarComponent()
-        HomeContent(recommendedExperiencesUiState = recommendedExperiences)
+        HomeContent(
+            recommendedExperiencesUiState = recommendedExperiences,
+            mostRecentExperiencesUiState = mostRecentExperiences
+        )
     }
 }
 

@@ -19,7 +19,8 @@ import com.alaa.hossam.aroundegypt.ui.components.experience_list_item.Experience
 @Composable
 fun HomeContent(
     modifier: Modifier = Modifier,
-    recommendedExperiencesUiState: UiState<List<Experience>>
+    recommendedExperiencesUiState: UiState<List<Experience>>,
+    mostRecentExperiencesUiState: UiState<List<Experience>>
 ) {
     LazyColumn(modifier = modifier.fillMaxSize()) {
         item {
@@ -59,9 +60,22 @@ fun HomeContent(
             Spacer(Modifier.height(8.dp))
         }
 
-        /*items(10) {
-            ExperienceListItemComponent(Exp)
-        }*/
+
+        when {
+            mostRecentExperiencesUiState is UiState.Loading ->
+                item { CircularProgressIndicator() }
+
+            mostRecentExperiencesUiState is UiState.Success ->
+                items(
+                    items = mostRecentExperiencesUiState.data as List<Experience>,
+                    key = { experience -> experience.id }
+                ) { experience ->
+                    ExperienceListItemComponent(experience = experience)
+                }
+
+            mostRecentExperiencesUiState is UiState.Error ->
+                item { Text(text = mostRecentExperiencesUiState.message) }
+        }
     }
 }
 
@@ -69,6 +83,7 @@ fun HomeContent(
 @Composable
 private fun HomeContentPreview() {
     HomeContent(
-        recommendedExperiencesUiState = UiState.Initial
+        recommendedExperiencesUiState = UiState.Initial,
+        mostRecentExperiencesUiState = UiState.Initial,
     )
 }
