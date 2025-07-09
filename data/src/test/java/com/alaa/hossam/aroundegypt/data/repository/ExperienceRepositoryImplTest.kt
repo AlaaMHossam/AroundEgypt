@@ -12,7 +12,7 @@ class ExperienceRepositoryImplTest {
     fun when_get_experiences_is_success_then_list_is_returned() {
         // Given
         val experienceRepositoryImpl =
-            ExperienceRepositoryImpl(DataDi().provideExperienceRemoteDataSource())
+            ExperienceRepositoryImpl(DataDi().providesExperienceRemoteDataSource())
 
         // When
 

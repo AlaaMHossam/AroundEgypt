@@ -1,6 +1,7 @@
 package com.alaa.hossam.aroundegypt.ui.components.top_app_bar
 
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -14,7 +15,10 @@ import com.alaa.hossam.aroundegypt.ui.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopAppBarComponent(modifier: Modifier = Modifier) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = modifier.fillMaxWidth()
+    ) {
         IconButton(
             onClick = {},
             content = {

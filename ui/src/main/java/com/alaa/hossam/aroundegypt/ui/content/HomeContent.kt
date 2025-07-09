@@ -5,15 +5,22 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.alaa.hossam.aroundegypt.common_utils.UiState
+import com.alaa.hossam.aroundegypt.domain.model.Experience
 import com.alaa.hossam.aroundegypt.ui.components.experience_list_item.ExperienceListItemComponent
 
 @Composable
-fun HomeContent(modifier: Modifier = Modifier) {
+fun HomeContent(
+    modifier: Modifier = Modifier,
+    recommendedExperiencesUiState: UiState<List<Experience>>
+) {
     LazyColumn(modifier = modifier.fillMaxSize()) {
         item {
             // Title & Description
@@ -25,11 +32,24 @@ fun HomeContent(modifier: Modifier = Modifier) {
             Text(text = "Recommended Experiences")
             Spacer(Modifier.height(8.dp))
         }
+
         item {
-            LazyRow {
-                items(10) {
-                    ExperienceListItemComponent()
-                }
+            when {
+                recommendedExperiencesUiState is UiState.Loading ->
+                    CircularProgressIndicator()
+
+                recommendedExperiencesUiState is UiState.Success ->
+                    LazyRow {
+                        items(
+                            items = recommendedExperiencesUiState.data as List<Experience>,
+                            key = { experience -> experience.id }
+                        ) { experience ->
+                            ExperienceListItemComponent(experience = experience)
+                        }
+                    }
+
+                recommendedExperiencesUiState is UiState.Error ->
+                    Text(text = recommendedExperiencesUiState.message)
             }
         }
 
@@ -39,14 +59,16 @@ fun HomeContent(modifier: Modifier = Modifier) {
             Spacer(Modifier.height(8.dp))
         }
 
-        items(10) {
-            ExperienceListItemComponent()
-        }
+        /*items(10) {
+            ExperienceListItemComponent(Exp)
+        }*/
     }
 }
 
 @Preview
 @Composable
 private fun HomeContentPreview() {
-    HomeContent()
+    HomeContent(
+        recommendedExperiencesUiState = UiState.Initial
+    )
 }
