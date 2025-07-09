@@ -28,7 +28,9 @@ fun HomeScreen(modifier: Modifier = Modifier, viewModel: AroundEgyptViewModel = 
         verticalArrangement = Arrangement.spacedBy(16.dp),
         modifier = modifier.fillMaxWidth()
     ) {
-        TopAppBarComponent()
+        TopAppBarComponent(onSearchClick = {
+            viewModel.updateContentUiState(ContentUiState.Search)
+        })
 
         when(contentUiState) {
             is ContentUiState.Home -> HomeContent(

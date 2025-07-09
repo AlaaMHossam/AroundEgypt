@@ -2,11 +2,14 @@ package com.alaa.hossam.aroundegypt.ui.screens
 
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
+import androidx.compose.ui.test.performImeAction
+import androidx.compose.ui.test.performTextInput
 import com.alaa.hossam.aroundegypt.common_utils.DataState
 import com.alaa.hossam.aroundegypt.domain.usecase.GetMostRecentExperiencesUseCase
 import com.alaa.hossam.aroundegypt.domain.usecase.GetRecommendedExperiencesUseCase
 import com.alaa.hossam.aroundegypt.ui.AroundEgyptViewModel
 import com.alaa.hossam.aroundegypt.ui.SEARCH_CONTENT_TEST_TAG
+import com.alaa.hossam.aroundegypt.ui.SEARCH_FIELD_TEST_TAG
 import com.alaa.hossam.aroundegypt.ui.states.ContentUiState
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -47,6 +50,18 @@ class HomeScreenTest {
 
         // When
         viewModel.updateContentUiState(ContentUiState.Search)
+
+        // Then
+        composeTestRule.onNodeWithTag(SEARCH_CONTENT_TEST_TAG).assertExists()
+    }
+
+    @Test
+    fun when_search_ime_action_called_then_search_content_is_displayed() {
+        // Given
+        composeTestRule.onNodeWithTag(SEARCH_FIELD_TEST_TAG).performTextInput("Luxor")
+
+        // When
+        composeTestRule.onNodeWithTag(SEARCH_FIELD_TEST_TAG).performImeAction()
 
         // Then
         composeTestRule.onNodeWithTag(SEARCH_CONTENT_TEST_TAG).assertExists()
