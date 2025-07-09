@@ -7,6 +7,7 @@ import com.alaa.hossam.aroundegypt.common_utils.UiState
 import com.alaa.hossam.aroundegypt.domain.model.Experience
 import com.alaa.hossam.aroundegypt.domain.usecase.GetMostRecentExperiencesUseCase
 import com.alaa.hossam.aroundegypt.domain.usecase.GetRecommendedExperiencesUseCase
+import com.alaa.hossam.aroundegypt.domain.usecase.SearchUseCase
 import com.alaa.hossam.aroundegypt.ui.states.ContentUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,7 +20,8 @@ import javax.inject.Inject
 class AroundEgyptViewModel
 @Inject constructor(
     private val getRecommendedExperiencesUseCase: GetRecommendedExperiencesUseCase,
-    private val getMostRecentExperiencesUseCase: GetMostRecentExperiencesUseCase
+    private val getMostRecentExperiencesUseCase: GetMostRecentExperiencesUseCase,
+    private val searchUseCase: SearchUseCase
 ) : ViewModel() {
 
     private val recommendedExperienceMutableUiState =
@@ -32,6 +34,9 @@ class AroundEgyptViewModel
 
     private val contentMutableUiState = MutableStateFlow<ContentUiState>(ContentUiState.Home)
     val contentUiState = contentMutableUiState.asStateFlow()
+
+    private val searchMutableState = MutableStateFlow<UiState<List<Experience>>>(UiState.Initial)
+    val searchState = searchMutableState.asStateFlow()
 
     init {
         updateRecommendedExperiences()
@@ -70,6 +75,14 @@ class AroundEgyptViewModel
     }
 
     fun updateSearchState(searchText: String) {
-
+        viewModelScope.launch {
+            searchMutableState.update { UiState.Loading }
+            val result = searchUseCase.invoke(searchText)
+            when (result) {
+                is DataState.Success ->
+                    searchMutableState.update { UiState.Success(result.data) }
+                is DataState.Error -> {}
+            }
+        }
     }
 }

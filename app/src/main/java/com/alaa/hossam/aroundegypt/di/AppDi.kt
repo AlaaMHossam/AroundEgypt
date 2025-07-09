@@ -3,6 +3,7 @@ package com.alaa.hossam.aroundegypt.di
 import com.alaa.hossam.aroundegypt.domain.repository.ExperienceRepository
 import com.alaa.hossam.aroundegypt.domain.usecase.GetMostRecentExperiencesUseCase
 import com.alaa.hossam.aroundegypt.domain.usecase.GetRecommendedExperiencesUseCase
+import com.alaa.hossam.aroundegypt.domain.usecase.SearchUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,4 +25,9 @@ class AppDi {
     fun providesGetMostRecentExperiencesUseCase(experienceRepository: ExperienceRepository):
             GetMostRecentExperiencesUseCase =
         GetMostRecentExperiencesUseCase(experienceRepository)
+
+    @Singleton
+    @Provides
+    fun providesSearchUseCase(experienceRepository: ExperienceRepository):
+            SearchUseCase = SearchUseCase(experienceRepository)
 }

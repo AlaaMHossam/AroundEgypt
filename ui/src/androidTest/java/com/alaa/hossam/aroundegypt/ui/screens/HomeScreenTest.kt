@@ -7,6 +7,7 @@ import androidx.compose.ui.test.performTextInput
 import com.alaa.hossam.aroundegypt.common_utils.DataState
 import com.alaa.hossam.aroundegypt.domain.usecase.GetMostRecentExperiencesUseCase
 import com.alaa.hossam.aroundegypt.domain.usecase.GetRecommendedExperiencesUseCase
+import com.alaa.hossam.aroundegypt.domain.usecase.SearchUseCase
 import com.alaa.hossam.aroundegypt.ui.AroundEgyptViewModel
 import com.alaa.hossam.aroundegypt.ui.SEARCH_CONTENT_TEST_TAG
 import com.alaa.hossam.aroundegypt.ui.SEARCH_FIELD_TEST_TAG
@@ -28,6 +29,7 @@ class HomeScreenTest {
         mockk<GetRecommendedExperiencesUseCase>(relaxed = true)
     private val mockGetMostRecentExperiencesUseCase =
         mockk<GetMostRecentExperiencesUseCase>(relaxed = true)
+    private val mockSearchUseCase = mockk<SearchUseCase>(relaxed = true)
 
     private lateinit var spyViewModel: AroundEgyptViewModel
 
@@ -39,7 +41,8 @@ class HomeScreenTest {
         spyViewModel = spyk(
             AroundEgyptViewModel(
                 getRecommendedExperiencesUseCase = mockGetRecommendedExperiencesUseCase,
-                getMostRecentExperiencesUseCase = mockGetMostRecentExperiencesUseCase
+                getMostRecentExperiencesUseCase = mockGetMostRecentExperiencesUseCase,
+                searchUseCase = mockSearchUseCase
             )
         )
 
