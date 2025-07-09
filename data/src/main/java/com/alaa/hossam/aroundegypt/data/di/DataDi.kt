@@ -2,6 +2,8 @@ package com.alaa.hossam.aroundegypt.data.di
 
 import com.alaa.hossam.aroundegypt.data.BuildConfig
 import com.alaa.hossam.aroundegypt.data.data_source.ExperienceRemoteDataSource
+import com.alaa.hossam.aroundegypt.data.repository.ExperienceRepositoryImpl
+import com.alaa.hossam.aroundegypt.domain.repository.ExperienceRepository
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -34,7 +36,11 @@ class DataDi {
 
     @Singleton
     @Provides
-    internal fun provideExperienceRemoteDataSource(): ExperienceRemoteDataSource =
+    internal fun providesExperienceRemoteDataSource(): ExperienceRemoteDataSource =
         retrofit.create(ExperienceRemoteDataSource::class.java)
 
+    @Singleton
+    @Provides
+    fun providesExperienceRepository(experienceRemoteDataSource: ExperienceRemoteDataSource) : ExperienceRepository=
+        ExperienceRepositoryImpl(experienceRemoteDataSource)
 }

@@ -49,6 +49,10 @@ dependencies {
 
     // HILT Dependencies
     implementation(libs.hilt.android)
+    implementation(project(":ui"))
+    implementation(project(":common_utils"))
+    implementation(project(":domain"))
+    implementation(project(":data"))
     ksp(libs.hilt.android.compiler)
 
     implementation(libs.androidx.core.ktx)

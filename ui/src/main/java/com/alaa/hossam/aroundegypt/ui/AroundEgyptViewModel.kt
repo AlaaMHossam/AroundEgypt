@@ -6,12 +6,16 @@ import com.alaa.hossam.aroundegypt.common_utils.DataState
 import com.alaa.hossam.aroundegypt.common_utils.UiState
 import com.alaa.hossam.aroundegypt.domain.model.Experience
 import com.alaa.hossam.aroundegypt.domain.usecase.GetRecommendedExperiencesUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AroundEgyptViewModel(private val getRecommendedExperiencesUseCase: GetRecommendedExperiencesUseCase) :
+@HiltViewModel
+class AroundEgyptViewModel
+@Inject constructor(private val getRecommendedExperiencesUseCase: GetRecommendedExperiencesUseCase) :
     ViewModel() {
 
     private val recommendedExperienceMutableUiState =
